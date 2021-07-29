@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "comma-dangle": ["warn", "never"],
+    "space-before-blocks": "warn", 
+    "eol-last": "off",
+    "prettier/prettier": 0,
+    "no-mixed-spaces-and-tabs": "off",
+    "semi": "warn",
+    "object-curly-spacing": ["warn", "always"],
+    "react-native/no-inline-styles": "off",
+    "react/jsx-tag-spacing": ["warn", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    }],
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "jsx-quotes": ["warn", "prefer-double"],
+    "react/jsx-closing-bracket-location": ["warn", "tag-aligned"]
+  }
+}
