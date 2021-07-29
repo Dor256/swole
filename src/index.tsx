@@ -1,7 +1,7 @@
+import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useCachedResources } from './hooks/useCachedResources';
@@ -9,8 +9,9 @@ import { useColorScheme } from './hooks/useColorScheme';
 import { BottomTabNavigator } from './bottom-tabs';
 import LinkingConfiguration from './LinkingConfiguration';
 import { NotFound } from './not-found';
-import { api } from './api';
+import { api, User } from './api';
 import { LoginPage } from './login';
+import { useMaybeState } from './hooks/useMaybeState';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -20,7 +21,7 @@ export type RootStackParamList = {
 
 export type NavigationProps = {
   colorScheme: ColorSchemeName;
-}
+};
 
 const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
   return (
@@ -35,15 +36,27 @@ const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
 
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
+const RootScreen: React.FC = () => {
+  const [maybeUser, setUser] = useMaybeState<Omit<User, 'password'>>();
+
+  async function onLogin(user: Omit<User, 'id'>) {
+    const maybeUserResponse = await api.logIn(user);
+    setUser(maybeUserResponse);
+  }
+
+  return maybeUser.inCaseOf({
+    Just: () => <BottomTabNavigator api={api} />,
+    Nothing: () => <LoginPage onLogin={onLogin} />
+  });
+};
+
 const RootNavigator: React.FC = () => {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="Login">
-        {(props) => <LoginPage logIn={api.logIn} {...props} />}
-      </Screen>
-      <Screen name="Root">
-        {(props) => <BottomTabNavigator api={api} {...props} />}
-      </Screen>
+      <Screen
+        name="Root"
+        component={RootScreen}
+      />
       <Screen
         name="NotFound"
         component={NotFound}

@@ -11,7 +11,7 @@ export type WorkoutItemProps = {
 export const WorkoutItem: React.FC<WorkoutItemProps> = (props) => {
   return (
     <Pressable style={styles.item} onPress={props.onPress}>
-      <Text>{props.workout.type === 'strength' ? '🏋️' : '💪'}  {props.workout.name}</Text>
+      <Text>{props.workout.goal === 'strength' ? '🏋️' : '💪'}  {props.workout.name}</Text>
     </Pressable>
   );
 };

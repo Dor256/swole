@@ -1,5 +1,4 @@
 import React from 'react';
-import { Maybe } from '@unpacked/tool-belt';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import type { User } from '../api';
@@ -9,7 +8,7 @@ import { Text } from '../common/components/Themed';
 import { useState } from 'react';
 
 export type LoginProps = {
-  logIn(user: Omit<User, 'id'>): Promise<Maybe<Omit<User, 'password'>>>
+  onLogin(user: Omit<User, 'id'>): Promise<void>;
 }
 
 export const LoginPage: React.FC<LoginProps> = (props) => {
@@ -17,7 +16,7 @@ export const LoginPage: React.FC<LoginProps> = (props) => {
   const [password, setPassword] = useState('');
 
   async function onLogIn() {
-    await props.logIn({ email, password });
+    await props.onLogin({ email, password });
   }
 
   return (
