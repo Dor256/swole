@@ -15,6 +15,10 @@ export type User = {
   password: string;
 };
 
+export type JWTResponse = {
+  jwt: string;
+};
+
 const baseURL = 'http://localhost:8080/';
 const http = axios.create({ baseURL });
 
@@ -24,8 +28,9 @@ export type Api = {
   addWorkout(workout: Omit<IWorkout, 'id'>): Promise<void>;
   updateWorkout(workout: IWorkout): Promise<void>;
   deleteWorkout(id: string): Promise<void>;
-  signUp(user: Omit<User, 'id'>): Promise<void>;
-  logIn(user: Omit<User, 'id'>): Promise<Maybe<Omit<User, 'password'>>>;
+  signUp(user: Omit<User, 'id'>): Promise<Maybe<string>>;
+  logIn(user: Omit<User, 'id'>): Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
+  authorizeToken(jwt: string): Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
 }
 
 export const api: Api = {
@@ -47,10 +52,19 @@ export const api: Api = {
     await http.delete(`workouts/${id}`);
   },
   async signUp(user: Omit<User, 'id'>) {
-    await http.post(`auth/signup`, user);
+    const response = await http.post(`auth/signup`, user);
+    return Maybe.fromValue(response.data?.jwt);
   },
   async logIn(user: Omit<User, 'id'>) {
     const response = await http.post(`auth/login`, user);
+    return Maybe.fromValue(response.data);
+  },
+  async authorizeToken(jwt: string) {
+    const response = await http.get(`auth/authorize`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
     return Maybe.fromValue(response.data);
   }
 };

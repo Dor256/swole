@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Colors } from '../constants/Colors';
+import { Colors } from '../common/constants/Colors';
 import { useColorScheme } from '../hooks/useColorScheme';
 import { TabBarIcon } from '../tab-bar-icon';
 import { WorkoutsTab } from '../workouts-tab';

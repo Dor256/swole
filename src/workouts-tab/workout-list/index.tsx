@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from '../../common/components/Themed';
-import { IWorkout } from '../../api';
+import { IWorkout } from '../../common/api';
 import { ScrollView } from 'react-native-gesture-handler';
 import { WorkoutItem } from './workout-item';
 import { WorkoutsTabParams } from '..';

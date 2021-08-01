@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
-import { IWorkout } from '../../../api';
+import { IWorkout } from '../../../common/api';
 import { Text } from '../../../common/components/Themed';
 
 export type WorkoutItemProps = {

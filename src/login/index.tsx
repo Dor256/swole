@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import type { User } from '../api';
+import type { User } from '../common/api';
 import { Button } from '../common/components/Button';
 import { Input } from '../common/components/Input';
 import { Text } from '../common/components/Themed';

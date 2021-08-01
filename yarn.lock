@@ -2354,10 +2354,10 @@
   dependencies:
     invariant "^2.2.4"
 
-"@unpacked/tool-belt@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@unpacked/tool-belt/-/tool-belt-1.0.2.tgz#a578536098833d9051c927fa97e530d350a9bd3d"
-  integrity sha512-uk/lCdqaiEsIZ7A8SnTd0JXBj/1GL78DZa3d2T63m0cxe5ohflT1QmcUICv2fX5QSeoVRWWqIJ9ltHATbDxmIw==
+"@unpacked/tool-belt@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@unpacked/tool-belt/-/tool-belt-1.0.3.tgz#7665be3bffdecddec3384bf135e75a37bc9695c2"
+  integrity sha512-6Iv9KuCE5C+3YVBGZiGJU2xhTQSsKT5iRZO3rtpxDTldem/1qZ9xwoHQPkVrHrOMSE2J7c6Vmgs9jaFelBi60g==
 
 abab@^2.0.0:
   version "2.0.5"
@@ -4142,6 +4142,11 @@ expo-permissions@~12.0.1:
   version "12.0.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/expo-permissions/-/expo-permissions-12.0.1.tgz#5163c00d991bf565bf987354611628c298ddd0c4"
   integrity sha1-UWPADZkb9WW/mHNUYRYowpjd0MQ=
+
+expo-secure-store@~10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-10.1.0.tgz#a223b3323526b152cd29c6e13058d8c8c2711eab"
+  integrity sha512-mH53aCptDMiLGopsq0uSpeRLtVpFi+IgwqLGNvIKn0CnSxBUbzE9bq5TSKCBm4JxN4/viohpV3R7L6Qj8MQT+g==
 
 expo-splash-screen@~0.10.2:
   version "0.10.2"

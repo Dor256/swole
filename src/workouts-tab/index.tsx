@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { WorkoutList } from './workout-list';
 import { Workout } from './workout';
-import { IWorkout } from '../api';
+import { IWorkout } from '../common/api';
 import { Maybe } from '@unpacked/tool-belt';
 import { useMaybeState } from '../hooks/useMaybeState';
 import { Text } from '../common/components/Themed';
