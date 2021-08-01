@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "workouts",
-    "slug": "workouts",
+    "name": "Swole",
+    "slug": "swole",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "workouts",
+    "scheme": "swole",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dorb255.workouts"
+      "bundleIdentifier": "com.unpacked.swole"
     },
     "android": {
       "adaptiveIcon": {

@@ -1,3 +1,3 @@
-# Workouts App
+# Swole App
 
-This repo contains the code for the `Workouts` App.
+This repo contains the code for the `Swole` App.

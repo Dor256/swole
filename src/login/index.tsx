@@ -21,7 +21,7 @@ export const LoginPage: React.FC<LoginProps> = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Welcome to Workouts</Text>
+      <Text style={styles.header}>Welcome to Swole</Text>
       <Input
         style={styles.input}
         value={email}
