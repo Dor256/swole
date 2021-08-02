@@ -5,7 +5,7 @@ import { Workout } from './workout';
 import { IWorkout } from '../common/api';
 import { Maybe } from '@unpacked/tool-belt';
 import { useMaybeState } from '../hooks/useMaybeState';
-import { Text } from '../common/components/Themed';
+import { Loader } from '../common/components/Loader';
 
 export type WorkoutsTabParams = {
   WorkoutList: { workouts: Maybe<IWorkout[]> };
@@ -39,7 +39,7 @@ export const WorkoutsTab: React.FC<WorkoutsTabProps> = (props) => {
         {(props) => {
           return maybeWorkouts.inCaseOf({
             Just: (workouts) => <WorkoutList workouts={workouts} {...props} />,
-            Nothing: () => <Text>Loading...</Text>
+            Nothing: () => <Loader />
           });
         }}
       </Screen>

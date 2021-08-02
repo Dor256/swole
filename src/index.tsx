@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
@@ -9,16 +9,16 @@ import { useColorScheme } from './hooks/useColorScheme';
 import { BottomTabNavigator } from './bottom-tabs';
 import LinkingConfiguration from './LinkingConfiguration';
 import { NotFound } from './not-found';
-import { api, User } from './common/api';
-import { LoginPage } from './login';
-import { useMaybeState } from './hooks/useMaybeState';
-import { AuthContext, AuthProvider } from './context/AuthProvider';
-import { saveJWT } from './common/storage';
-import { Maybe } from '@unpacked/tool-belt';
-import { useAuth } from './hooks/useAuth';
+import { api } from './common/api';
+import { LoginPage } from './auth/login';
+import { WelcomeScreen } from './auth/welcome-screen';
+import { AuthProvider, useAuth } from './hooks/useAuth';
+import { SignUpPage } from './auth/signup';
 
 export type RootStackParamList = {
+  Welcome: undefined;
   Login: undefined;
+  Signup: undefined;
   Root: undefined;
   NotFound: undefined;
 };
@@ -41,27 +41,20 @@ const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const RootScreen: React.FC = () => {
-  // const [,setUser] = useMaybeState<Omit<User, 'password'>>();
-  const { maybeUser, setMaybeUser } = useContext(AuthContext);
-
-  async function onLogin(user: Omit<User, 'id'>) {
-    const maybeUserResponse = await api.logIn(user);
-    setMaybeUser(maybeUserResponse);
-    maybeUserResponse.inCaseOf({
-      Nothing: () => Promise.resolve(),
-      Just: (user) => saveJWT(user.jwt)
-    });
-  }
+  const { maybeUser } = useAuth();
 
   return maybeUser.inCaseOf({
-    Nothing: () => <LoginPage onLogin={onLogin} />,
+    Nothing: () => {
+      return (
+        <Navigator screenOptions={{ headerBackTitle: 'Back' }}>
+          <Screen name="Welcome" component={WelcomeScreen} />
+          <Screen name="Login" component={LoginPage} />
+          <Screen name="Signup" component={SignUpPage} />
+        </Navigator>
+      );
+    },
     Just: () => <BottomTabNavigator api={api} />
   });
-
-  // return maybeUser.inCaseOf({
-  //   Just: () => <BottomTabNavigator api={api} />,
-  //   Nothing: () => <LoginPage onLogin={onLogin} />
-  // });
 };
 
 const RootNavigator: React.FC = () => {
@@ -81,16 +74,18 @@ const RootNavigator: React.FC = () => {
 };
 
 export const App: React.FC = () => {
-  const isLoadingComplete = useCachedResources();
+  const { isLoadingComplete, maybeUser, setMaybeUser } = useCachedResources();
   const colorScheme = useColorScheme();
-  const [ maybeUser, setMaybeUser ] = useAuth();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <AuthProvider value={{ maybeUser, setMaybeUser }}>
+        <AuthProvider
+          maybeUser={maybeUser}
+          setMaybeUser={setMaybeUser}
+        >
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
         </AuthProvider>

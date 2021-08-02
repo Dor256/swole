@@ -1,27 +1,29 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import type { User } from '../common/api';
-import { Button } from '../common/components/Button';
-import { Input } from '../common/components/Input';
-import { Text } from '../common/components/Themed';
+import type { User } from '../../common/api';
+import { Button } from '../../common/components/Button';
+import { Input } from '../../common/components/Input';
+import { Text } from '../../common/components/Themed';
 import { useState } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 
 export type LoginProps = {
   onLogin(user: Omit<User, 'id'>): Promise<void>;
 }
 
-export const LoginPage: React.FC<LoginProps> = (props) => {
+export const LoginPage: React.FC<LoginProps> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { logIn } = useAuth();
 
   async function onLogIn() {
-    await props.onLogin({ email, password });
+    await logIn({ email, password });
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Welcome to Swole</Text>
+      <Text style={styles.header}>Login to Your Account</Text>
       <Input
         style={styles.input}
         value={email}
@@ -49,7 +51,7 @@ export const LoginPage: React.FC<LoginProps> = (props) => {
         style={styles.button}
         onPress={onLogIn}
       >
-        <Text lightColor="#fff">Submit</Text>
+        Submit
       </Button>
     </SafeAreaView>
   );

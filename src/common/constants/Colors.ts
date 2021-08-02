@@ -10,7 +10,8 @@ export const Colors = {
     tabIconSelected: tintColorLight,
     input: '#d1d1d1',
     button: tintColorLight,
-    buttonPressed: '#2676ad'
+    buttonPressed: '#2676ad',
+    link: '#0e78e3'
   },
   dark: {
     text: '#fff',
@@ -20,6 +21,7 @@ export const Colors = {
     tabIconSelected: tintColorDark,
     input: '#5c5c5c',
     button: '#55a7e0',
-    buttonPressed: '#4689b8'
+    buttonPressed: '#4689b8',
+    link: '#0e78e3'
   }
 };

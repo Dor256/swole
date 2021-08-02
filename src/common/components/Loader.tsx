@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { Animated, Easing, ViewStyle } from 'react-native';
+import { View } from './Themed';
 
 export type LoaderProps = {
   style?: ViewStyle
@@ -64,7 +65,7 @@ export const Loader: React.FC<LoaderProps> = ({ style }) => {
   }, []);
 
   return (
-    <>
+    <View style={styles.container}>
       <Animated.View
         style={[
           styles.innerPulse,
@@ -78,7 +79,7 @@ export const Loader: React.FC<LoaderProps> = ({ style }) => {
           { transform: [{ scale: outerRadius.current }] }
         ]}
       />
-    </>
+    </View>
   );
 };
 
@@ -97,5 +98,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#5ea0d6',
     borderRadius: 100,
     alignSelf: 'center'
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text } from '../../common/components/Themed';
 import { IWorkout } from '../../common/api';
 import { ScrollView } from 'react-native-gesture-handler';
 import { WorkoutItem } from './workout-item';
 import { WorkoutsTabParams } from '..';
 import { useNavigation } from '../../hooks/useNavigation';
+import { EmptyList } from './empty-list';
 
 export type WorkoutListProps = {
   workouts: IWorkout[];
@@ -19,7 +19,7 @@ export const WorkoutList: React.FC<WorkoutListProps> = (props) => {
   };
 
   if (props.workouts.length == 0) {
-    return <Text>Empty Workout List</Text>;
+    return <EmptyList />;
   }
 
   return (

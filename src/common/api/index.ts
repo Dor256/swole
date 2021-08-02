@@ -28,9 +28,9 @@ export type Api = {
   addWorkout(workout: Omit<IWorkout, 'id'>): Promise<void>;
   updateWorkout(workout: IWorkout): Promise<void>;
   deleteWorkout(id: string): Promise<void>;
-  signUp(user: Omit<User, 'id'>): Promise<Maybe<string>>;
+  signUp(user: Omit<User, 'id'>):Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
   logIn(user: Omit<User, 'id'>): Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
-  authorizeToken(jwt: string): Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
+  authorizeToken(jwt: string): Promise<Maybe<Omit<User, 'password'>>>;
 }
 
 export const api: Api = {
@@ -53,7 +53,7 @@ export const api: Api = {
   },
   async signUp(user: Omit<User, 'id'>) {
     const response = await http.post(`auth/signup`, user);
-    return Maybe.fromValue(response.data?.jwt);
+    return Maybe.fromValue(response.data);
   },
   async logIn(user: Omit<User, 'id'>) {
     const response = await http.post(`auth/login`, user);
