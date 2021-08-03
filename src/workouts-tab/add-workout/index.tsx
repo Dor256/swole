@@ -1,12 +1,13 @@
 import { Maybe } from '@unpacked/tool-belt';
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 import { Goal, IWorkout } from '../../common/api';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
 import { useThemeColor, View } from '../../common/components/Themed';
 import { useMaybeState } from '../../hooks/useMaybeState';
 import { Picker } from '@react-native-picker/picker';
+import { TouchableWithoutFeedback } from 'react-native';
 
 export type AddWorkoutProps = {
   addWorkout(workout: Omit<IWorkout, 'id'>): Promise<void>;
@@ -31,24 +32,26 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Input
-        value={maybeName.orElse('')}
-        onChangeText={onNameChange}
-        autoFocus
-      />
-      <Picker
-        style={styles.picker}
-        selectedValue={goal}
-        onValueChange={setGoal}
-      >
-        <Picker.Item color={color} label="Strength" value="strength" />
-        <Picker.Item color={color} label="Hypertrophy" value="hypertrophy" />
-      </Picker>
-      <Button onPress={onAddWorkout}>
-        Add Workout
-      </Button>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Input
+          value={maybeName.orElse('')}
+          onChangeText={onNameChange}
+          autoFocus
+        />
+        <Picker
+          style={styles.picker}
+          selectedValue={goal}
+          onValueChange={setGoal}
+        >
+          <Picker.Item color={color} label="Strength" value="strength" />
+          <Picker.Item color={color} label="Hypertrophy" value="hypertrophy" />
+        </Picker>
+        <Button onPress={onAddWorkout}>
+          Add Workout
+        </Button>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
