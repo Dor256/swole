@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Goal, IWorkout } from '../../common/api';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
-import { View } from '../../common/components/Themed';
+import { useThemeColor, View } from '../../common/components/Themed';
 import { useMaybeState } from '../../hooks/useMaybeState';
 import { Picker } from '@react-native-picker/picker';
 
@@ -15,6 +15,7 @@ export type AddWorkoutProps = {
 export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
   const [maybeName, setMaybeName] = useMaybeState<string>();
   const [goal, setGoal] = useState<Goal>('strength');
+  const color = useThemeColor({}, 'text');
 
   function onAddWorkout() {
     maybeName.inCaseOf({
@@ -34,14 +35,15 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
       <Input
         value={maybeName.orElse('')}
         onChangeText={onNameChange}
+        autoFocus
       />
       <Picker
         style={styles.picker}
         selectedValue={goal}
         onValueChange={setGoal}
       >
-        <Picker.Item label="Strength" value="strength" />
-        <Picker.Item label="Hypertrophy" value="hypertrophy" />
+        <Picker.Item color={color} label="Strength" value="strength" />
+        <Picker.Item color={color} label="Hypertrophy" value="hypertrophy" />
       </Picker>
       <Button onPress={onAddWorkout}>
         Add Workout
