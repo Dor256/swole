@@ -43,10 +43,10 @@ export const api: Api = {
     return Maybe.fromValue(response.data);
   },
   async addWorkout(workout: Omit<IWorkout, 'id'>) {
-    await http.post('workouts', { data: workout });
+    await http.post('workouts', workout);
   },
   async updateWorkout(workout: IWorkout) {
-    await http.put(`workouts/${workout.id}`, { data: workout });
+    await http.put(`workouts/${workout.id}`, workout);
   },
   async deleteWorkout(id: string) {
     await http.delete(`workouts/${id}`);

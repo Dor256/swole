@@ -2,14 +2,14 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Colors } from '../common/constants/Colors';
 import { useColorScheme } from '../hooks/useColorScheme';
-import { TabBarIcon } from '../tab-bar-icon';
+import { TabBarIcon } from '../common/components/TabBarIcon';
 import { WorkoutsTab } from '../workouts-tab';
 import { ProfileTab } from '../profile-tab';
 import { Ports } from '../types';
 
 export type BottomTabParamList = {
-  Workouts: undefined;
-  Profile: undefined;
+  WorkoutsTab: undefined;
+  ProfileTab: undefined;
 };
 
 export type BottomTabNavigatorProps = Ports;
@@ -21,22 +21,24 @@ export const BottomTabNavigator: React.FC<BottomTabNavigatorProps> = ({ api }) =
 
   return (
     <Navigator
-      initialRouteName="Workouts"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      initialRouteName="WorkoutsTab"
+      screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint, headerShown: false }}
     >
       <Screen
-        name="Workouts"
+        name="WorkoutsTab"
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="dumbbell" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="dumbbell" color={color} />,
+          title: 'Workouts'
         }}
       >
-        {(props) => <WorkoutsTab fetchWorkouts={api.fetchAllWorkouts} {...props} />}
+        {(props) => <WorkoutsTab api={api} {...props} />}
       </Screen>
       <Screen
-        name="Profile"
+        name="ProfileTab"
         component={ProfileTab}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="user-alt" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-alt" color={color} />,
+          title: 'Profile'
         }}
       />
     </Navigator>
