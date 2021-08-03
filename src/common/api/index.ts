@@ -19,7 +19,7 @@ export type JWTResponse = {
   jwt: string;
 };
 
-const baseURL = 'http://localhost:8080/';
+const baseURL = __DEV__ ? 'http://localhost:8080' : 'https://swole-workouts.herokuapp.com/';
 const http = axios.create({ baseURL });
 
 export type Api = {

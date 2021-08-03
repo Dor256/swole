@@ -6,5 +6,9 @@ export async function saveJWT(token: string) {
 }
 
 export async function maybeGetJWT(): Promise<Maybe<string>> {
-  return Maybe.fromValue(await getItemAsync('jwt'));
+  try {
+    return Maybe.fromValue(await getItemAsync('jwt'));
+  } catch {
+    return Maybe.fromValue();
+  }
 }

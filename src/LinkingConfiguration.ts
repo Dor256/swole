@@ -1,6 +1,8 @@
+import { LinkingOptions } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
+import { RootStackParamList } from '.';
 
-export default {
+export const LinkingConfiguration: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {

@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useCachedResources } from './hooks/useCachedResources';
 import { useColorScheme } from './hooks/useColorScheme';
 import { BottomTabNavigator } from './bottom-tabs';
-import LinkingConfiguration from './LinkingConfiguration';
+import { LinkingConfiguration } from './LinkingConfiguration';
 import { NotFound } from './not-found';
 import { api } from './common/api';
 import { LoginPage } from './auth/login';
@@ -53,23 +53,27 @@ const RootScreen: React.FC = () => {
         </Navigator>
       );
     },
-    Just: () => <BottomTabNavigator api={api} />
+    Just: () => {
+      return (
+        <BottomTabNavigator api={api} />
+      );
+    }
   });
 };
 
 const RootNavigator: React.FC = () => {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen
-        name="Root"
-        component={RootScreen}
-      />
-      <Screen
-        name="NotFound"
-        component={NotFound}
-        options={{ title: 'Oops!' }}
-      />
-    </Navigator>
+        <Screen
+          name="Root"
+          component={RootScreen}
+        />
+        <Screen
+          name="NotFound"
+          component={NotFound}
+          options={{ title: 'Oops!' }}
+        />
+      </Navigator>
   );
 };
 
