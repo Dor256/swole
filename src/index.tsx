@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import { ColorSchemeName } from 'react-native';
@@ -14,6 +14,7 @@ import { WelcomeScreen } from './auth/welcome-screen';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { SignUpPage } from './auth/signup';
 import { Home } from './home';
+import { DarkTheme, LightTheme } from './common/constants/NavigationThemes';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -31,7 +32,7 @@ const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      theme={colorScheme === 'dark' ? DarkTheme : LightTheme}
     >
       <RootNavigator />
     </NavigationContainer>

@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
   input: {
     borderRadius: 10,
     minWidth: '60%',
-    padding: '2%'
+    padding: '2.5%'
   }
 });
