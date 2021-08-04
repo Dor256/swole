@@ -1,12 +1,12 @@
 import React from 'react';
 import { RouteProp, useRoute } from '@react-navigation/core';
 import { Text, View } from '../../common/components/Themed';
-import { WorkoutsTabParams } from '..';
 import { StyleSheet } from 'react-native';
 import { useNavigationOptions } from '../../hooks/useNavigationOptions';
+import { BottomTabParamList } from '../../bottom-tabs';
 
 export const Workout: React.FC = () => {
-  const { params } = useRoute<RouteProp<WorkoutsTabParams, "Workout">>();
+  const { params } = useRoute<RouteProp<BottomTabParamList, "Workout">>();
 
   useNavigationOptions({ headerTitle: params.name }, [params]);
 

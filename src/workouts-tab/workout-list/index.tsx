@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { IWorkout } from '../../common/api';
 import { ScrollView } from 'react-native-gesture-handler';
 import { WorkoutItem } from './workout-item';
-import { WorkoutsTabParams } from '..';
 import { useNavigation } from '../../hooks/useNavigation';
 import { EmptyList } from './empty-list';
+import { BottomTabParamList } from '../../bottom-tabs';
 
 export type WorkoutListProps = {
   workouts: IWorkout[];
 };
 
 export const WorkoutList: React.FC<WorkoutListProps> = (props) => {
-  const navigation = useNavigation<WorkoutsTabParams>();
+  const navigation = useNavigation<BottomTabParamList>();
 
   const onWorkoutPress = (name: string) => () => {
     navigation.navigate('Workout', { name });

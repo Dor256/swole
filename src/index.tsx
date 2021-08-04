@@ -6,7 +6,6 @@ import { ColorSchemeName } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useCachedResources } from './hooks/useCachedResources';
 import { useColorScheme } from './hooks/useColorScheme';
-import { BottomTabNavigator } from './bottom-tabs';
 import { LinkingConfiguration } from './LinkingConfiguration';
 import { NotFound } from './not-found';
 import { api } from './common/api';
@@ -14,6 +13,7 @@ import { LoginPage } from './auth/login';
 import { WelcomeScreen } from './auth/welcome-screen';
 import { AuthProvider, useAuth } from './hooks/useAuth';
 import { SignUpPage } from './auth/signup';
+import { Home } from './home';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -55,7 +55,7 @@ const RootScreen: React.FC = () => {
     },
     Just: () => {
       return (
-        <BottomTabNavigator api={api} />
+        <Home api={api} />
       );
     }
   });

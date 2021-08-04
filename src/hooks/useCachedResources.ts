@@ -22,7 +22,11 @@ export function useCachedResources() {
         })
       ]);
       maybeJWT.inCaseOf({
-        Nothing: () => setMaybeUser(Maybe.fromValue()),
+        Nothing: () => {
+          setMaybeUser(Maybe.fromValue());
+          SplashScreen.hideAsync();
+          setLoadingComplete(true);
+        },
         Just: async (jwt) => {
           try {
             const maybeUser = await api.authorizeToken(jwt);

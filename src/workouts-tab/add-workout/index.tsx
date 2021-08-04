@@ -20,7 +20,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
 
   function onAddWorkout() {
     maybeName.inCaseOf({
-      Nothing: () => console.warn('Must enter name'),
+      Nothing: () => console.warn('Must enter name!'),
       Just: async (name) => {
         await props.addWorkout({ name, goal });
       }
