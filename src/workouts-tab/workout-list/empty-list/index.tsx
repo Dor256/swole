@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 15,
-    fontFamily: '500',
+    fontWeight: '400',
     marginBottom: '5%'
   }
 });

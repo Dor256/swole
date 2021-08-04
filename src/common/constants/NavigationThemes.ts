@@ -7,6 +7,7 @@ export const DarkTheme = {
   colors: {
     ...NDarkTheme.colors,
     card: '#242424',
-    background: '#1c1c1c'
+    background: '#1c1c1c',
+    border: '#4d4d4d'
   }
 };
