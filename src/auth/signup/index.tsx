@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, SafeAreaView } from 'react-native';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
 import { Text } from '../../common/components/Themed';
