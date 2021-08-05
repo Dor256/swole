@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import type { User } from '../../common/api';
 import { Button } from '../../common/components/Button';
@@ -22,38 +22,40 @@ export const LoginPage: React.FC<LoginProps> = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Login to Your Account</Text>
-      <Input
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        textContentType="emailAddress"
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Email"
-        clearButtonMode="while-editing"
-        keyboardType="email-address"
-      />
-      <Input
-        value={password}
-        onChangeText={setPassword}
-        textContentType="password"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Password"
-        clearButtonMode="while-editing"
-        returnKeyType="go"
-        onSubmitEditing={onLogIn}
-      />
-      <Button
-        style={styles.button}
-        onPress={onLogIn}
-      >
-        Submit
-      </Button>
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Login to Your Account</Text>
+        <Input
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email"
+          clearButtonMode="while-editing"
+          keyboardType="email-address"
+        />
+        <Input
+          value={password}
+          onChangeText={setPassword}
+          textContentType="password"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          clearButtonMode="while-editing"
+          returnKeyType="go"
+          onSubmitEditing={onLogIn}
+        />
+        <Button
+          style={styles.button}
+          onPress={onLogIn}
+        >
+          Submit
+        </Button>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

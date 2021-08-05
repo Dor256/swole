@@ -37,6 +37,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
         <Input
           value={maybeName.orElse('')}
           onChangeText={onNameChange}
+          placeholder="Enter Workout Name"
           autoFocus
         />
         <Picker

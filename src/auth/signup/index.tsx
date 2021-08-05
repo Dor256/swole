@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
@@ -21,50 +22,52 @@ export const SignUpPage: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Create Your Account</Text>
-      <Input
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        textContentType="emailAddress"
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Email"
-        clearButtonMode="while-editing"
-        keyboardType="email-address"
-      />
-      <Input
-        value={password}
-        style={styles.input}
-        onChangeText={setPassword}
-        textContentType="password"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Password"
-        clearButtonMode="while-editing"
-        returnKeyType="go"
-      />
-      <Input
-        value={passwordVerification}
-        onChangeText={setPasswordVerification}
-        textContentType="password"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        placeholder="Verify Password"
-        clearButtonMode="while-editing"
-        returnKeyType="go"
-        onSubmitEditing={onSignUp}
-      />
-      <Button
-        style={styles.button}
-        onPress={onSignUp}
-      >
-        Submit
-      </Button>
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.header}>Create Your Account</Text>
+        <Input
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Email"
+          clearButtonMode="while-editing"
+          keyboardType="email-address"
+        />
+        <Input
+          value={password}
+          style={styles.input}
+          onChangeText={setPassword}
+          textContentType="password"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Password"
+          clearButtonMode="while-editing"
+          returnKeyType="go"
+        />
+        <Input
+          value={passwordVerification}
+          onChangeText={setPasswordVerification}
+          textContentType="password"
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="Verify Password"
+          clearButtonMode="while-editing"
+          returnKeyType="go"
+          onSubmitEditing={onSignUp}
+        />
+        <Button
+          style={styles.button}
+          onPress={onSignUp}
+        >
+          Submit
+        </Button>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
