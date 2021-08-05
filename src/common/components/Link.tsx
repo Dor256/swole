@@ -1,14 +1,28 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { ReactNode } from 'react';
+import { Pressable, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { TextProps, useThemeColor, Text } from './Themed';
 
-export const Link: React.FC<TextProps> = ({ style, lightColor, darkColor, ...props }) => {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'link');
+type LinkProps = TextProps & {
+  icon?: ReactNode;
+  style?: StyleProp<ViewStyle>;
+  color?: string;
+};
+
+export const Link: React.FC<LinkProps> = ({ style, lightColor, darkColor, icon, color, ...props }) => {
+  const linkColor = useThemeColor({ light: lightColor, dark: darkColor }, 'link');
   
-  return <Text style={[{ color }, styles.link, style]} {...props} />;
+  return (
+    <Pressable style={[styles.container, style]} {...props}>
+      {icon}
+      <Text style={[{ color: color ?? linkColor }, styles.link]}>{props.children}</Text>
+    </Pressable>
+  );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row'
+  },
   link: {
    fontSize: 15,
    fontWeight: '700'

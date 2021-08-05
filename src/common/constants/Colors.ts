@@ -12,7 +12,8 @@ export const Colors = {
     button: tintColorLight,
     buttonPressed: '#2676ad',
     link: '#0e78e3',
-    loader: '#5ea0d6'
+    loader: '#5ea0d6',
+    danger: '#b53333'
   },
   dark: {
     text: '#fff',
@@ -24,6 +25,7 @@ export const Colors = {
     button: '#55a7e0',
     buttonPressed: '#4689b8',
     link: '#0e78e3',
-    loader: '#5ea0d6'
+    loader: '#5ea0d6',
+    danger: '#b53333'
   }
 };

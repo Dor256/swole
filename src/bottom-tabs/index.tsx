@@ -8,8 +8,6 @@ import { TabBarIcon } from '../common/components/TabBarIcon';
 import { Loader } from '../common/components/Loader';
 import { WorkoutList } from '../workouts-tab/workout-list';
 import { Profile } from '../profile-tab/profile';
-import { FloatingActionButton } from '../common/components/FloatingActionButton';
-import { useNavigation } from '../hooks/useNavigation';
 
 export type BottomTabParamList = {
   Workouts: undefined;
@@ -27,15 +25,10 @@ export type TabProps = {
 
 export const BottomTabs: React.FC<TabProps> = (props) => {
   const colorScheme = useColorScheme();
-  const navigation = useNavigation<BottomTabParamList>();
 
   useEffect(() => {
     props.fetchWorkouts();
   }, []);
-
-  function onAddWorkout() {
-    navigation.navigate('AddWorkout');
-  }
 
   return (
     <TabNavigator
@@ -51,14 +44,7 @@ export const BottomTabs: React.FC<TabProps> = (props) => {
         {() => {
           return props.maybeWorkouts.inCaseOf({
             Nothing: () => <Loader />,
-            Just: (workouts) => {
-             return (
-                <>
-                  <WorkoutList workouts={workouts} />
-                  <FloatingActionButton onPress={onAddWorkout} />
-                </>
-             );
-            }
+            Just: (workouts) => <WorkoutList workouts={workouts} />
           });
         }}
       </Tab>

@@ -14,13 +14,15 @@ export type UserContext = {
   logIn(user: Omit<User, 'id'>): Promise<void>;
   signUp(user: Omit<User, 'id'>): Promise<void>;
   setMaybeUser: React.Dispatch<React.SetStateAction<Maybe<Omit<User, "password">>>>;
+  logOut(): Promise<void>;
 };
 
 export const AuthContext = React.createContext<UserContext>({
   maybeUser: Maybe.fromValue(),
   logIn: Promise.resolve,
   signUp: Promise.resolve,
-  setMaybeUser: (prevState) => prevState
+  setMaybeUser: (prevState) => prevState,
+  logOut: Promise.resolve
 });
 
 
@@ -53,15 +55,21 @@ function useProvideAuth(maybeUser: Maybe<Omit<User, 'password'>>, setMaybeUser: 
     });
   }
 
+  async function logOut() {
+    setMaybeUser(Maybe.fromValue());
+  }
+
   return {
     maybeUser,
     signUp,
     logIn,
-    setMaybeUser
+    setMaybeUser,
+    logOut
   };
 }
 
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const { logIn, signUp, maybeUser, logOut } = useContext(AuthContext);
+  return { logIn, signUp, maybeUser, logOut };
 }
