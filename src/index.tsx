@@ -15,6 +15,7 @@ import { AuthProvider, useAuth } from './hooks/useAuth';
 import { SignUpPage } from './auth/signup';
 import { Home } from './home';
 import { DarkTheme, LightTheme } from './common/constants/NavigationThemes';
+import { SplashScreen } from './splash';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -82,19 +83,17 @@ export const App: React.FC = () => {
   const { isLoadingComplete, maybeUser, setMaybeUser } = useCachedResources();
   const colorScheme = useColorScheme();
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <SafeAreaProvider>
-        <AuthProvider
-          maybeUser={maybeUser}
-          setMaybeUser={setMaybeUser}
-        >
+  return (
+    <SafeAreaProvider>
+      <AuthProvider
+        maybeUser={maybeUser}
+        setMaybeUser={setMaybeUser}
+      >
+        <SplashScreen isLoadingComplete={isLoadingComplete}>
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
-        </AuthProvider>
-      </SafeAreaProvider>
-    );
-  }
+        </SplashScreen>
+      </AuthProvider>
+    </SafeAreaProvider>
+  );
 };
