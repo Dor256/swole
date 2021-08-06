@@ -13,7 +13,9 @@ export const Colors = {
     buttonPressed: '#2676ad',
     link: '#0e78e3',
     loader: '#5ea0d6',
-    danger: '#b53333'
+    card: '#fff',
+    border: '#fff',
+    danger: '#d14141'
   },
   dark: {
     text: '#fff',
@@ -26,6 +28,8 @@ export const Colors = {
     buttonPressed: '#4689b8',
     link: '#0e78e3',
     loader: '#5ea0d6',
+    card: '#383838',
+    border: '#4d4d4d',
     danger: '#b53333'
   }
 };

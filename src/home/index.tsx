@@ -25,7 +25,7 @@ export const Home: React.FC<HomeProps> = ({ api }) => {
   async function addWorkout(workout: Omit<IWorkout, 'id'>) {
     try {
       await api.addWorkout(workout);
-      fetchWorkouts();
+      await fetchWorkouts();
       navigation.goBack();
     } catch (err) {
       console.warn('Adding workout failed');

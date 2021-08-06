@@ -1,36 +1,55 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { FunctionComponent } from 'react';
-import { PressableStateCallbackType, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Pressable } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from 'react-native-reanimated';
 import { ThemeProps, useThemeColor } from './Themed';
 
 export type FABProps = {
   onPress(): void;
 } & ThemeProps;
 
-export const FloatingActionButton: FunctionComponent<FABProps> = ({ onPress, lightColor, darkColor }) => {
+export const FloatingActionButton: FunctionComponent<FABProps> = ({ lightColor, darkColor, ...props }) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'button');
-  const backgroundColorPress = useThemeColor({ light: lightColor, dark: darkColor }, 'buttonPressed');
+  const scale = useSharedValue(1);
 
-  function onPressableStateChange(state: PressableStateCallbackType): StyleProp<ViewStyle> {
-    return [
-      { backgroundColor: state.pressed ? backgroundColorPress : backgroundColor },
-      styles.fab
-    ];
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{
+        scale: withTiming(scale.value, {
+          duration: 110,
+          easing: Easing.elastic(0)
+        })
+      }]
+    };
+  }, []);
+
+  function onPressEngaged() {
+    scale.value = 0.8;
+  }
+
+  function onPressReleased() {
+    scale.value = 1;
+    props.onPress();
   }
 
   return (
-    <Pressable onPress={onPress} style={onPressableStateChange}>
-      <Ionicons name="add" style={styles.fabText} />
+    <Pressable
+      onPressOut={onPressReleased}
+      onPressIn={onPressEngaged}
+    >
+      <Animated.View style={[{ backgroundColor }, styles.fab, animatedStyle]}>
+        <Ionicons name="add" style={styles.fabText} />
+      </Animated.View>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute',
-    top: '87%',
-    left: '82%',
+    position: 'relative',
+    bottom: '30%',
+    left: '83%',
     borderRadius: 100,
     width: 50,
     height: 50,

@@ -4,9 +4,9 @@ import { SafeAreaView } from 'react-native';
 import type { User } from '../../common/api';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
-import { Text } from '../../common/components/Themed';
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
+import { Header } from '../../common/components/Header';
 
 export type LoginProps = {
   onLogin(user: Omit<User, 'id'>): Promise<void>;
@@ -15,16 +15,18 @@ export type LoginProps = {
 export const LoginPage: React.FC<LoginProps> = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const { logIn } = useAuth();
 
   async function onLogIn() {
+    setLoading(true);
     await logIn({ email, password });
   }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Login to Your Account</Text>
+        <Header>Login to Your Account</Header>
         <Input
           style={styles.input}
           value={email}
@@ -51,6 +53,7 @@ export const LoginPage: React.FC<LoginProps> = () => {
         <Button
           style={styles.button}
           onPress={onLogIn}
+          showLoader={loading}
         >
           Submit
         </Button>
@@ -63,11 +66,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center'
-  },
-  header: {
-    marginVertical: '10%',
-    fontSize: 20,
-    fontWeight: 'bold'
   },
   input: {
     marginBottom: '10%'

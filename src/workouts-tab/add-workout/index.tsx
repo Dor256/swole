@@ -16,12 +16,14 @@ export type AddWorkoutProps = {
 export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
   const [maybeName, setMaybeName] = useMaybeState<string>();
   const [goal, setGoal] = useState<Goal>('strength');
+  const [loading, setLoading] = useState(false);
   const color = useThemeColor({}, 'text');
 
   function onAddWorkout() {
     maybeName.inCaseOf({
       Nothing: () => console.warn('Must enter name!'),
       Just: async (name) => {
+        setLoading(true);
         await props.addWorkout({ name, goal });
       }
     });
@@ -48,7 +50,10 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
           <Picker.Item color={color} label="Strength" value="strength" />
           <Picker.Item color={color} label="Hypertrophy" value="hypertrophy" />
         </Picker>
-        <Button onPress={onAddWorkout}>
+        <Button
+          onPress={onAddWorkout}
+          showLoader={loading}
+        >
           Add Workout
         </Button>
       </View>
@@ -59,8 +64,8 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: '20%'
   },
   picker: {
     width: '45%'

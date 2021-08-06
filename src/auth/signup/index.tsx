@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { Keyboard, SafeAreaView } from 'react-native';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '../../common/components/Button';
+import { Header } from '../../common/components/Header';
 import { Input } from '../../common/components/Input';
-import { Text } from '../../common/components/Themed';
 import { useAuth } from '../../hooks/useAuth';
 
 export const SignUpPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [passwordVerification, setPasswordVerification] = useState('');
+  const [loading, setLoading] = useState(false);
   const { signUp } = useAuth();
 
   async function onSignUp() {
     if (password !== passwordVerification) {
       console.error('PASSWORDS DONT MATCHCHCHC');
     } else {
+      setLoading(true);
       await signUp({ email, password });
     }
   }
@@ -23,7 +25,7 @@ export const SignUpPage: React.FC = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>Create Your Account</Text>
+        <Header>Create Your Account</Header>
         <Input
           style={styles.input}
           value={email}
@@ -62,6 +64,7 @@ export const SignUpPage: React.FC = () => {
         <Button
           style={styles.button}
           onPress={onSignUp}
+          showLoader={loading}
         >
           Submit
         </Button>
@@ -74,11 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center'
-  },
-  header: {
-    marginVertical: '10%',
-    fontSize: 20,
-    fontWeight: 'bold'
   },
   input: {
     marginBottom: '10%'

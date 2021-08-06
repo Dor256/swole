@@ -2,16 +2,18 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import type { PressableProps, PressableStateCallbackType, StyleProp, ViewStyle } from 'react-native';
 import { Text, ThemeProps, useThemeColor } from './Themed';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ActivityIndicator } from 'react-native';
 
 export type ButtonProps = ThemeProps & PressableProps & {
+  showLoader?: boolean;
   style?: StyleProp<ViewStyle>;
   children?: string;
 };
 
-export const Button: React.FC<ButtonProps> = ({ style, lightColor, darkColor, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ style, lightColor, darkColor, showLoader = false, ...props }) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'button');
   const backgroundColorPress = useThemeColor({ light: lightColor, dark: darkColor }, 'buttonPressed');
+  const loaderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   function onPressableStateChange(state: PressableStateCallbackType): StyleProp<ViewStyle> {
     return [
@@ -21,17 +23,27 @@ export const Button: React.FC<ButtonProps> = ({ style, lightColor, darkColor, ..
     ];
   }
 
-  return (
-    <Pressable
-      style={onPressableStateChange}
-      {...props}
-    >
+  function ChildrenOrLoader() {
+    if (showLoader) {
+      return <ActivityIndicator color={loaderColor} />;
+    }
+    return (
       <Text
         lightColor="#fff"
         style={styles.text}
       >
         {props.children}
       </Text>
+    );
+  }
+
+  return (
+    <Pressable
+      style={onPressableStateChange}
+      disabled={showLoader}
+      {...props}
+    >
+      <ChildrenOrLoader />
     </Pressable>
   );
 };

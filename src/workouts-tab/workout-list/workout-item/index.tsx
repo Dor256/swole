@@ -1,7 +1,9 @@
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { IWorkout } from '../../../common/api';
+import { Card } from '../../../common/components/Card';
 import { Text } from '../../../common/components/Themed';
+import { GoalsToEmoji } from '../../../common/constants/GoalsToEmoji';
 
 export type WorkoutItemProps = {
   workout: IWorkout;
@@ -10,21 +12,14 @@ export type WorkoutItemProps = {
 
 export const WorkoutItem: React.FC<WorkoutItemProps> = (props) => {
   return (
-    <Pressable style={styles.item} onPress={props.onPress}>
-      <Text>{props.workout.goal === 'strength' ? '🏋️' : '💪'}  {props.workout.name}</Text>
-    </Pressable>
+    <Card style={styles.item} onPress={props.onPress}>
+      <Text>{GoalsToEmoji[props.workout.goal]}  {props.workout.name}</Text>
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   item: {
-    marginBottom: 20,
-    padding: 10,
-    width: '70%',
-    alignItems: 'center',
-    borderColor: '#616161',
-    backgroundColor: '#383838',
-    borderWidth: 1,
-    borderRadius: 10
+    marginBottom: 20
   }
 });
