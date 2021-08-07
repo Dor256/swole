@@ -7,10 +7,10 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
 
   const get = {
     async loginButton() {
-      return base.queryByTestId(testIDs.LoginButton);
+      return base.queryByTestId(testIDs.LOGIN_BUTTON);
     },
     async signUpButton() {
-      return base.queryByTestId(testIDs.SignupButton);
+      return base.queryByTestId(testIDs.SIGNUP_BUTTON);
     }
   };
 

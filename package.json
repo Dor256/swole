@@ -11,7 +11,7 @@
     "lint": "eslint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "./jest-preset.ts"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",

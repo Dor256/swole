@@ -22,14 +22,14 @@ export const WelcomeScreen: React.FC = () => {
     <View style={styles.container}>
       <Header>Welcome to Swole</Header>
       <Button
-        testID={testIDs.LoginButton}
+        testID={testIDs.LOGIN_BUTTON}
         style={styles.login}
         onPress={onLoginPress}
       >
         LOG IN
       </Button>
       <Button
-        testID={testIDs.SignupButton}
+        testID={testIDs.SIGNUP_BUTTON}
         onPress={onSignupPress}
       >
         SIGN UP

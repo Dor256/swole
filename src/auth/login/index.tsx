@@ -1,18 +1,15 @@
 import React from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import type { User } from '../../common/api';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Header } from '../../common/components/Header';
+import { testIDs } from '../../common/constants/TestIDs';
+import { validateEmail } from '../../common/utils';
 
-export type LoginProps = {
-  onLogin(user: Omit<User, 'id'>): Promise<void>;
-}
-
-export const LoginPage: React.FC<LoginProps> = () => {
+export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,7 +17,11 @@ export const LoginPage: React.FC<LoginProps> = () => {
 
   async function onLogIn() {
     setLoading(true);
-    await logIn({ email, password });
+    if (!validateEmail(email)) {
+      setLoading(false);
+    } else {
+      await logIn({ email, password });
+    }
   }
 
   return (
@@ -28,6 +29,7 @@ export const LoginPage: React.FC<LoginProps> = () => {
       <SafeAreaView style={styles.container}>
         <Header>Login to Your Account</Header>
         <Input
+          testID={testIDs.LOGIN_EMAIL}
           style={styles.input}
           value={email}
           onChangeText={setEmail}
@@ -39,6 +41,7 @@ export const LoginPage: React.FC<LoginProps> = () => {
           keyboardType="email-address"
         />
         <Input
+          testID={testIDs.LOGIN_PASSWORD}
           value={password}
           onChangeText={setPassword}
           textContentType="password"
@@ -51,6 +54,7 @@ export const LoginPage: React.FC<LoginProps> = () => {
           onSubmitEditing={onLogIn}
         />
         <Button
+          testID={testIDs.LOGIN_SUBMIT}
           style={styles.button}
           onPress={onLogIn}
           showLoader={loading}

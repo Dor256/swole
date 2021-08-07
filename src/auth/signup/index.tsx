@@ -4,6 +4,8 @@ import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '../../common/components/Button';
 import { Header } from '../../common/components/Header';
 import { Input } from '../../common/components/Input';
+import { testIDs } from '../../common/constants/TestIDs';
+import { validateEmail } from '../../common/utils';
 import { useAuth } from '../../hooks/useAuth';
 
 export const SignUpPage: React.FC = () => {
@@ -14,8 +16,8 @@ export const SignUpPage: React.FC = () => {
   const { signUp } = useAuth();
 
   async function onSignUp() {
-    if (password !== passwordVerification) {
-      console.error('PASSWORDS DONT MATCHCHCHC');
+    if (!validateEmail(email) || password !== passwordVerification) {
+
     } else {
       setLoading(true);
       await signUp({ email, password });
@@ -27,6 +29,7 @@ export const SignUpPage: React.FC = () => {
       <SafeAreaView style={styles.container}>
         <Header>Create Your Account</Header>
         <Input
+          testID={testIDs.SIGNUP_EMAIL}
           style={styles.input}
           value={email}
           onChangeText={setEmail}
@@ -38,6 +41,7 @@ export const SignUpPage: React.FC = () => {
           keyboardType="email-address"
         />
         <Input
+          testID={testIDs.SIGNUP_PASSWORD}
           value={password}
           style={styles.input}
           onChangeText={setPassword}
@@ -50,6 +54,7 @@ export const SignUpPage: React.FC = () => {
           returnKeyType="go"
         />
         <Input
+          testID={testIDs.SIGNUP_VERIFY}
           value={passwordVerification}
           onChangeText={setPasswordVerification}
           textContentType="password"
@@ -62,6 +67,7 @@ export const SignUpPage: React.FC = () => {
           onSubmitEditing={onSignUp}
         />
         <Button
+          testID={testIDs.SIGNUP_SUBMIT}
           style={styles.button}
           onPress={onSignUp}
           showLoader={loading}
