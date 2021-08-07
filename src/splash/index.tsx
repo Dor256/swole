@@ -22,9 +22,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = (props) => {
     }
   }, [props.isLoadingComplete]);
 
+
   return (
     <>
-      {props.isLoadingComplete && props.children}
+      {props.children}
       {!splashAnimated &&
         <Animated.View
           style={[StyleSheet.absoluteFill, { opacity: opacity.current }, styles.container]}

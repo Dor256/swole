@@ -1975,6 +1975,14 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
+"@types/jest@^26.0.24":
+  version "26.0.24"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.24.tgz#943d11976b16739185913a1936e0de0c4a7d595a"
+  integrity sha512-E/X5Vib8BWqZNRlDxj9vYXhsDwPYbPINqKF9BsnSoon4RQ0D9moEuLD8txgyypFLH7J4+Lho9Nr/c8H0Fi+17w==
+  dependencies:
+    jest-diff "^26.0.0"
+    pretty-format "^26.0.0"
+
 "@types/json-schema@^7.0.7":
   version "7.0.9"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
@@ -3780,13 +3788,6 @@ expect@^26.6.2:
     jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
-expo-app-loading@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/expo-app-loading/-/expo-app-loading-1.1.2.tgz#9efcc29d373c2cd2fcddde5a04cb13875a539ac4"
-  integrity sha512-JdWa9CpB4LpIYgh9WLhpr5KoMOaBob03yBcKdSw1TIDgYUtCGfRLouxadpVOtkudY1x4/NN4ZZrH7Y5nB3SdlA==
-  dependencies:
-    expo-splash-screen "~0.11.2"
-
 expo-application@~3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/expo-application/-/expo-application-3.2.0.tgz#d029445cbc486b66f31ec3b8d556334119cebf48"
@@ -5053,7 +5054,7 @@ jest-config@^26.6.3:
     micromatch "^4.0.2"
     pretty-format "^26.6.2"
 
-jest-diff@^26.6.2:
+jest-diff@^26.0.0, jest-diff@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-26.6.2.tgz#1aa7468b52c3a68d7d5c5fdcdfcd5e49bd164394"
   integrity sha512-6m+9Z3Gv9wN0WFVasqjCL/06+EFCMTqDEUl/b87HYK2rAPTyfz4ZIuSlPhY51PIQRWx5TaxeF1qmXKe9gfN3sA==
@@ -6863,7 +6864,7 @@ pretty-format@^25.1.0, pretty-format@^25.2.0:
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
 
-pretty-format@^26.0.1, pretty-format@^26.4.0, pretty-format@^26.6.2:
+pretty-format@^26.0.0, pretty-format@^26.0.1, pretty-format@^26.4.0, pretty-format@^26.6.2:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.2.tgz#e35c2705f14cb7fe2fe94fa078345b444120fc93"
   integrity sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==

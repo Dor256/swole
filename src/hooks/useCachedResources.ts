@@ -7,13 +7,14 @@ import { api, User } from '../common/api';
 import * as SplashScreen from 'expo-splash-screen';
 import { useMaybeState } from './useMaybeState';
 
+SplashScreen.preventAutoHideAsync().catch(console.warn);
+
 export function useCachedResources() {
   const [maybeUser, setMaybeUser] = useMaybeState<Omit<User, "password">>();
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   useEffect(() => {
     async function loadResources() {
-      SplashScreen.preventAutoHideAsync();
       const [maybeJWT] = await Promise.all([
         maybeGetJWT(),
         loadAsync({
@@ -21,11 +22,9 @@ export function useCachedResources() {
           'space-mono': require('../../assets/fonts/SpaceMono-Regular.ttf')
         })
       ]);
-      maybeJWT.inCaseOf({
-        Nothing: () => {
+      return maybeJWT.inCaseOf({
+        Nothing: async () => {
           setMaybeUser(Maybe.fromValue());
-          SplashScreen.hideAsync();
-          setLoadingComplete(true);
         },
         Just: async (jwt) => {
           try {
@@ -33,14 +32,14 @@ export function useCachedResources() {
             setMaybeUser(maybeUser);
           } catch {
             console.log('Failed to fetch user');
-          } finally {
-            SplashScreen.hideAsync();
-            setLoadingComplete(true);
           }
         }
       });
     }
-    loadResources();
+    loadResources().then(() => {
+      SplashScreen.hideAsync();
+      setLoadingComplete(true);
+    });
   }, []);
 
   return { isLoadingComplete, maybeUser, setMaybeUser };
