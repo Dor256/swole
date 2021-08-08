@@ -13,7 +13,7 @@ export type HomeProps = Ports;
 
 const { Navigator, Screen } = createStackNavigator();
 
-export const Home: React.FC<HomeProps> = ({ api }) => {
+export const Home: React.FC<HomeProps> = ({ api, user }) => {
   const [maybeWorkouts, setMaybeWorkouts] = useMaybeState<IWorkout[]>();
   const navigation = useNavigation<BottomTabParamList>();
 
@@ -41,6 +41,7 @@ export const Home: React.FC<HomeProps> = ({ api }) => {
         {(props) => {
           return (
             <BottomTabs
+              user={user}
               maybeWorkouts={maybeWorkouts}
               fetchWorkouts={fetchWorkouts}
               {...props}

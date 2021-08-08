@@ -1,9 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { User } from '../../common/api';
 import { Link } from '../../common/components/Link';
 import { Text, useThemeColor, View } from '../../common/components/Themed';
 import { useAuth } from '../../hooks/useAuth';
+
+export type ProfileProps = {
+  user: Omit<User, 'password'>;
+};
 
 const LinkIcon = () => {
   const color = useThemeColor({}, 'danger');
@@ -17,13 +22,13 @@ const LinkIcon = () => {
   );
 };
 
-export const Profile: React.FC = () =>  {
+export const Profile: React.FC<ProfileProps> = ({ user }) =>  {
   const { logOut } = useAuth();
   const color = useThemeColor({}, 'danger');
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This will be the profile tab</Text>
+      <Text style={styles.title}>Welcome, {user.email}</Text>
       <Link
         icon={<LinkIcon />}
         style={styles.link}

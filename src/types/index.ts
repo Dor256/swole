@@ -1,5 +1,6 @@
-import { Api } from '../common/api';
+import { Api, User } from '../common/api';
 
 export type Ports = {
-  api: Api
+  api: Api;
+  user: Omit<User, 'password'>;
 };

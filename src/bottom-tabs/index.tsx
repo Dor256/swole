@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Maybe } from '@unpacked/tool-belt';
-import { IWorkout } from '../common/api';
+import { IWorkout, User } from '../common/api';
 import { useColorScheme } from '../hooks/useColorScheme';
 import { Colors } from '../common/constants/Colors';
 import { TabBarIcon } from '../common/components/TabBarIcon';
@@ -21,6 +21,7 @@ const { Navigator: TabNavigator, Screen: Tab } = createBottomTabNavigator<Bottom
 export type TabProps = {
   fetchWorkouts(): Promise<void>;
   maybeWorkouts: Maybe<IWorkout[]>;
+  user: Omit<User, 'password'>;
 }
 
 export const BottomTabs: React.FC<TabProps> = (props) => {
@@ -50,11 +51,12 @@ export const BottomTabs: React.FC<TabProps> = (props) => {
       </Tab>
       <Tab
         name="Profile"
-        component={Profile}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="user-alt" color={color} />
         }}
-      />
+      >
+        {() => <Profile user={props.user} />}
+      </Tab>
     </TabNavigator>
   );
 };

@@ -44,9 +44,9 @@ const RootScreen: React.FC = () => {
         </Navigator>
       );
     },
-    Just: () => {
+    Just: (user) => {
       return (
-        <Home api={api} />
+        <Home api={api} user={user} />
       );
     }
   });
