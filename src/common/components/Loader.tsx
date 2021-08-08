@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { Animated, Easing, ViewStyle } from 'react-native';
+import { testIDs } from '../constants/TestIDs';
 import { ThemeProps, useThemeColor, View } from './Themed';
 
 export type LoaderProps = {
-  style?: ViewStyle
+  style?: ViewStyle;
+  testID?: string;
 } & ThemeProps;
 
 const OUTER_PULSE_DURATION = 700;
@@ -66,7 +68,7 @@ export const Loader: React.FC<LoaderProps> = ({ style, lightColor, darkColor }) 
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View testID={testIDs.LOADER} style={styles.container}>
       <Animated.View
         style={[
           { backgroundColor },

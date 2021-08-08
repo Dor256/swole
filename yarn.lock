@@ -2150,6 +2150,11 @@
     expo-modules-autolinking "^0.0.3"
     invariant "^2.2.4"
 
+"@unpacked/react-native-jest-preset@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@unpacked/react-native-jest-preset/-/react-native-jest-preset-1.0.5.tgz#d4937dd566230deedd09ad77a189a909cccda8a9"
+  integrity sha512-1vmPbCJ4VHPG1xkwZ4LkNICvwo+3FfKz9rKec7lSBhglBXHv++j4YecRfka3rBhj/LLDn56F25zSQBkSwGEKsw==
+
 "@unpacked/tool-belt@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@unpacked/tool-belt/-/tool-belt-1.0.6.tgz#850f52ffe6187de0dc3190bdf6535b094ff75360"

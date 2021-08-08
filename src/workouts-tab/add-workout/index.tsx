@@ -8,6 +8,7 @@ import { useThemeColor, View } from '../../common/components/Themed';
 import { useMaybeState } from '../../hooks/useMaybeState';
 import { Picker } from '@react-native-picker/picker';
 import { TouchableWithoutFeedback } from 'react-native';
+import { testIDs } from '../../common/constants/TestIDs';
 
 export type AddWorkoutProps = {
   addWorkout(workout: Omit<IWorkout, 'id'>): Promise<void>;
@@ -37,12 +38,14 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Input
+          testID={testIDs.ADD_WORKOUT_NAME}
           value={maybeName.orElse('')}
           onChangeText={onNameChange}
           placeholder="Enter Workout Name"
           autoFocus
         />
         <Picker
+          testID={testIDs.ADD_WORKOUT_PICKER}
           style={styles.picker}
           selectedValue={goal}
           onValueChange={setGoal}
@@ -51,6 +54,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
           <Picker.Item color={color} label="Hypertrophy" value="hypertrophy" />
         </Picker>
         <Button
+          testID={testIDs.ADD_WORKOUT_SUBMIT}
           onPress={onAddWorkout}
           showLoader={loading}
         >

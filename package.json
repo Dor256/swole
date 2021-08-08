@@ -6,12 +6,17 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll --verbose",
     "lint": "eslint"
   },
   "jest": {
-    "preset": "./jest-preset.ts"
+    "preset": "@unpacked/react-native-jest-preset",
+    "transformIgnorePatterns": [
+      "node_modules/?!(@react-native-picker/picker|react-native-svg)"
+    ],
+    "resetMocks": true,
+    "setupFiles": ["<rootDir>/jest-setup.ts"]
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -52,6 +57,7 @@
     "@types/react-native": "~0.63.2",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "@unpacked/react-native-jest-preset": "1.0.5",
     "eslint": "^7.27.0",
     "eslint-plugin-react": "^7.23.2",
     "jest-expo": "^42.0.0",

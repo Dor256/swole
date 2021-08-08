@@ -7,6 +7,7 @@ import { ThemeProps, useThemeColor } from './Themed';
 
 export type FABProps = {
   onPress(): void;
+  testID?: string;
 } & ThemeProps;
 
 export const FloatingActionButton: FunctionComponent<FABProps> = ({ lightColor, darkColor, ...props }) => {
@@ -35,6 +36,7 @@ export const FloatingActionButton: FunctionComponent<FABProps> = ({ lightColor, 
 
   return (
     <Pressable
+      testID={props.testID}
       onPressOut={onPressReleased}
       onPressIn={onPressEngaged}
     >

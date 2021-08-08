@@ -16,10 +16,6 @@ jest.mock('../../hooks/useAuth', () => {
 });
 
 describe('Sign up screen', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('Renders correctyl', async () => {
     const driver = renderComponentAndCreateDriver(<SignUpPage />);
 

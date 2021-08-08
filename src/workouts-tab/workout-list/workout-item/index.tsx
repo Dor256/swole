@@ -4,6 +4,7 @@ import { IWorkout } from '../../../common/api';
 import { Card } from '../../../common/components/Card';
 import { Text } from '../../../common/components/Themed';
 import { GoalsToEmoji } from '../../../common/constants/GoalsToEmoji';
+import { testIDs } from '../../../common/constants/TestIDs';
 
 export type WorkoutItemProps = {
   workout: IWorkout;
@@ -12,7 +13,11 @@ export type WorkoutItemProps = {
 
 export const WorkoutItem: React.FC<WorkoutItemProps> = (props) => {
   return (
-    <Card style={styles.item} onPress={props.onPress}>
+    <Card
+      testID={testIDs.WORKOUT_ITEM_CARD}
+      style={styles.item}
+      onPress={props.onPress}
+    >
       <Text>{GoalsToEmoji[props.workout.goal]}  {props.workout.name}</Text>
     </Card>
   );

@@ -7,6 +7,7 @@ import { useNavigation } from '../../hooks/useNavigation';
 import { EmptyList } from './empty-list';
 import { BottomTabParamList } from '../../bottom-tabs';
 import { FloatingActionButton } from '../../common/components/FloatingActionButton';
+import { testIDs } from '../../common/constants/TestIDs';
 
 export type WorkoutListProps = {
   workouts: IWorkout[];
@@ -42,7 +43,10 @@ export const WorkoutList: React.FC<WorkoutListProps> = (props) => {
           );
         })}
       </ScrollView>
-      <FloatingActionButton onPress={onAddWorkoutPress} />
+      <FloatingActionButton
+        testID={testIDs.ADD_WORKOUT_FAB}
+        onPress={onAddWorkoutPress}
+      />
     </>
   );
 };

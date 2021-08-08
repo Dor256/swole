@@ -29,17 +29,6 @@ export type NavigationProps = {
   colorScheme: ColorSchemeName;
 };
 
-const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
-  return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : LightTheme}
-    >
-      <RootNavigator />
-    </NavigationContainer>
-  );
-};
-
 const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 const RootScreen: React.FC = () => {
@@ -63,9 +52,13 @@ const RootScreen: React.FC = () => {
   });
 };
 
-const RootNavigator: React.FC = () => {
+const Navigation: React.FC<NavigationProps> = ({ colorScheme }) => {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === 'dark' ? DarkTheme : LightTheme}
+    >
+      <Navigator screenOptions={{ headerShown: false }}>
         <Screen
           name="Root"
           component={RootScreen}
@@ -76,6 +69,7 @@ const RootNavigator: React.FC = () => {
           options={{ title: 'Oops!' }}
         />
       </Navigator>
+    </NavigationContainer>
   );
 };
 

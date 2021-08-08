@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { BottomTabParamList } from '../../../bottom-tabs';
 import { Link } from '../../../common/components/Link';
 import { Text, View } from '../../../common/components/Themed';
+import { testIDs } from '../../../common/constants/TestIDs';
 import { useNavigation } from '../../../hooks/useNavigation';
 
 export const EmptyList: React.FC = () => {
@@ -16,7 +17,7 @@ export const EmptyList: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>No Workouts</Text>
       <Text style={styles.subtitle}>Looks like you do not have any workouts yet.</Text>
-      <Link onPress={onAddWorkout}>
+      <Link testID={testIDs.ADD_WORKOUT_LINK} onPress={onAddWorkout}>
         Add Workout
       </Link>
     </View>
