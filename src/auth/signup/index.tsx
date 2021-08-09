@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Keyboard, SafeAreaView } from 'react-native';
+import { Keyboard } from 'react-native';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Button } from '../../common/components/Button';
 import { Header } from '../../common/components/Header';
 import { Input } from '../../common/components/Input';
+import { View } from '../../common/components/Themed';
 import { testIDs } from '../../common/constants/TestIDs';
 import { validateEmail } from '../../common/utils';
 import { useAuth } from '../../hooks/useAuth';
@@ -26,7 +27,7 @@ export const SignUpPage: React.FC = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Header>Create Your Account</Header>
         <Input
           testID={testIDs.SIGNUP_EMAIL}
@@ -74,7 +75,7 @@ export const SignUpPage: React.FC = () => {
         >
           Submit
         </Button>
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };

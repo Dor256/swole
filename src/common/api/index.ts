@@ -31,7 +31,7 @@ export type Api = {
   deleteWorkout(id: string): Promise<void>;
   signUp(user: Omit<User, 'id'>):Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
   logIn(user: Omit<User, 'id'>): Promise<Maybe<Omit<User, 'password'> & JWTResponse>>;
-  authorizeToken(jwt: string): Promise<Maybe<Omit<User, 'password'>>>;
+  authorizeToken(): Promise<Maybe<Omit<User, 'password'>>>;
 }
 
 export const api: Api = {
@@ -65,12 +65,9 @@ export const api: Api = {
     const response = await http.post(`auth/login`, user);
     return Maybe.fromValue(response.data);
   },
-  async authorizeToken(jwt: string) {
-    const response = await http.get(`auth/authorize`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`
-      }
-    });
+  async authorizeToken() {
+    const headers = await getAuthorizationHeader();
+    const response = await http.get(`auth/authorize`, { headers });
     return Maybe.fromValue(response.data);
   }
 };

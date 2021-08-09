@@ -1,6 +1,5 @@
 import React from 'react';
 import { Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { SafeAreaView } from 'react-native';
 import { Button } from '../../common/components/Button';
 import { Input } from '../../common/components/Input';
 import { useState } from 'react';
@@ -8,6 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Header } from '../../common/components/Header';
 import { testIDs } from '../../common/constants/TestIDs';
 import { validateEmail } from '../../common/utils';
+import { View } from '../../common/components/Themed';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ export const LoginPage: React.FC = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Header>Login to Your Account</Header>
         <Input
           testID={testIDs.LOGIN_EMAIL}
@@ -61,7 +61,7 @@ export const LoginPage: React.FC = () => {
         >
           Submit
         </Button>
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };

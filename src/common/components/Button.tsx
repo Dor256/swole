@@ -2,7 +2,9 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import type { PressableProps, PressableStateCallbackType, StyleProp, ViewStyle } from 'react-native';
 import { Text, ThemeProps, useThemeColor } from './Themed';
-import { StyleSheet, ActivityIndicator } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ActivityIndicator } from './ActivityIndicator';
+import { Colors } from '../constants/Colors';
 
 export type ButtonProps = ThemeProps & PressableProps & {
   showLoader?: boolean;
@@ -13,7 +15,6 @@ export type ButtonProps = ThemeProps & PressableProps & {
 export const Button: React.FC<ButtonProps> = ({ style, lightColor, darkColor, showLoader = false, ...props }) => {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'button');
   const backgroundColorPress = useThemeColor({ light: lightColor, dark: darkColor }, 'buttonPressed');
-  const loaderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   function onPressableStateChange(state: PressableStateCallbackType): StyleProp<ViewStyle> {
     return [
@@ -25,7 +26,7 @@ export const Button: React.FC<ButtonProps> = ({ style, lightColor, darkColor, sh
 
   function ChildrenOrLoader() {
     if (showLoader) {
-      return <ActivityIndicator color={loaderColor} />;
+      return <ActivityIndicator lightColor={Colors.dark.text} />;
     }
     return (
       <Text
