@@ -1,5 +1,6 @@
 import { Maybe } from '@unpacked/tool-belt';
 import axios from 'axios';
+import { maybeGetJWT } from '../storage';
 
 export type Goal = 'strength' | 'hypertrophy';
 
@@ -35,21 +36,26 @@ export type Api = {
 
 export const api: Api = {
   async fetchAllWorkouts() {
-    const response = await http.get('workouts');
+    const headers = await getAuthorizationHeader();
+    const response = await http.get('workouts', { headers });
     return Maybe.fromValue(response.data);
   },
   async fetchWorkoutById(id: string) {
-    const response = await http.get(`workouts/${id}`);
+    const headers = await getAuthorizationHeader();
+    const response = await http.get(`workouts/${id}`, { headers });
     return Maybe.fromValue(response.data);
   },
   async addWorkout(workout: Omit<IWorkout, 'id'>) {
-    await http.post('workouts', workout);
+    const headers = await getAuthorizationHeader();
+    await http.post('workouts', workout, { headers });
   },
   async updateWorkout(workout: IWorkout) {
-    await http.put(`workouts/${workout.id}`, workout);
+    const headers = await getAuthorizationHeader();
+    await http.put(`workouts/${workout.id}`, workout, { headers });
   },
   async deleteWorkout(id: string) {
-    await http.delete(`workouts/${id}`);
+    const headers = await getAuthorizationHeader();
+    await http.delete(`workouts/${id}`, { headers });
   },
   async signUp(user: Omit<User, 'id'>) {
     const response = await http.post(`auth/signup`, user);
@@ -68,3 +74,17 @@ export const api: Api = {
     return Maybe.fromValue(response.data);
   }
 };
+
+async function getAuthorizationHeader() {
+  const maybeJWT = await maybeGetJWT();
+  return maybeJWT.inCaseOf({
+    Nothing: () => {
+      return {};
+    },
+    Just: (jwt) => {
+      return {
+        Authorization: `Bearer ${jwt}`
+      };
+    }
+  });
+}
