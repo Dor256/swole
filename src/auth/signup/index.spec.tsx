@@ -16,7 +16,7 @@ jest.mock('../../hooks/useAuth', () => {
 });
 
 describe('Sign up screen', () => {
-  it('Renders correctyl', async () => {
+  it('Renders correctly', async () => {
     const driver = renderComponentAndCreateDriver(<SignUpPage />);
 
     const email = await driver.get.emailInput();
