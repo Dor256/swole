@@ -21,7 +21,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.unpacked.swole"
+      "bundleIdentifier": "com.xpacked.swole"
     },
     "android": {
       "adaptiveIcon": {
