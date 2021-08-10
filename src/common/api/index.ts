@@ -1,4 +1,4 @@
-import { Maybe } from '@unpacked/tool-belt';
+import { Maybe } from '@xpacked/tool-belt';
 import axios from 'axios';
 import { maybeGetJWT } from '../storage';
 

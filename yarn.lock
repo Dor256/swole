@@ -2150,15 +2150,15 @@
     expo-modules-autolinking "^0.0.3"
     invariant "^2.2.4"
 
-"@unpacked/react-native-jest-preset@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@unpacked/react-native-jest-preset/-/react-native-jest-preset-1.0.5.tgz#d4937dd566230deedd09ad77a189a909cccda8a9"
-  integrity sha512-1vmPbCJ4VHPG1xkwZ4LkNICvwo+3FfKz9rKec7lSBhglBXHv++j4YecRfka3rBhj/LLDn56F25zSQBkSwGEKsw==
+"@xpacked/react-native-jest-preset@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@xpacked/react-native-jest-preset/-/react-native-jest-preset-1.0.0.tgz#3924354378cf79e6ee8cfbc3acdbc215b06c9b78"
+  integrity sha512-mGauk+uavrOPGkPjXfQrnLNkNhOCObs/WEsTfdAzyEk6uinwu/woIWb7X05MoiNrQGpjQtUWO1LmtZHIpr+jFA==
 
-"@unpacked/tool-belt@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@unpacked/tool-belt/-/tool-belt-1.0.6.tgz#850f52ffe6187de0dc3190bdf6535b094ff75360"
-  integrity sha512-LljQF3hQOjvQlZInrVAJ88/Q3hE1qK+Xn6yAJg/6TW4gPMDg5WAcav1IdLEKqF7JsAqAwvy4OCNPWJfXiDk1mQ==
+"@xpacked/tool-belt@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@xpacked/tool-belt/-/tool-belt-1.0.0.tgz#005a1202b98a74ed51141a39f107a38eab0cafbe"
+  integrity sha512-oVPeQYqHNxeSfBy7k0i9Si0QlKjO241+z4PUpIa+pSAhNNz9ine99XGLe2luS9ui03rfpEgquwldw4OVl9EJXQ==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"

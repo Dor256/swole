@@ -1,4 +1,4 @@
-import { Maybe } from '@unpacked/tool-belt';
+import { Maybe } from '@xpacked/tool-belt';
 import { setItemAsync, getItemAsync, deleteItemAsync } from 'expo-secure-store';
 
 export async function saveJWT(token: string) {

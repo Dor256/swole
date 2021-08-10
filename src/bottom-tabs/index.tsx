@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Maybe } from '@unpacked/tool-belt';
+import { Maybe } from '@xpacked/tool-belt';
 import { IWorkout, User } from '../common/api';
 import { useColorScheme } from '../hooks/useColorScheme';
 import { Colors } from '../common/constants/Colors';

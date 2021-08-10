@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { RootStackParamList } from '../..';
 import { Button } from '../../common/components/Button';
 import { Header } from '../../common/components/Header';
@@ -20,7 +20,8 @@ export const WelcomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Header>Welcome to Swole</Header>
+      <Image style={styles.image} source={require('../../../assets/images/icon.png')} />
+      <Header style={styles.header}>Welcome to Swole</Header>
       <Button
         testID={testIDs.LOGIN_BUTTON}
         style={styles.login}
@@ -30,6 +31,7 @@ export const WelcomeScreen: React.FC = () => {
       </Button>
       <Button
         testID={testIDs.SIGNUP_BUTTON}
+        style={styles.signup}
         onPress={onSignupPress}
       >
         SIGN UP
@@ -43,7 +45,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
+  image: {
+    marginTop: '15%',
+    height: 200,
+    width: 200,
+    borderRadius: 100
+  },
+  header: {
+    marginBottom: '50%'
+  },
+  signup: {
+    width: '65%'
+  },
   login: {
+    width: '65%',
     marginBottom: '5%'
   }
 });
