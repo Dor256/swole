@@ -49,8 +49,8 @@ export const FloatingActionButton: FunctionComponent<FABProps> = ({ lightColor, 
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'relative',
-    bottom: '30%',
+    position: 'absolute',
+    bottom: 10,
     left: '83%',
     borderRadius: 100,
     width: 50,

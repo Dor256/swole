@@ -53,7 +53,7 @@ export const WorkoutList: React.FC<WorkoutListProps> = (props) => {
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: '40%',
+    paddingTop: '20%',
     alignItems: 'center'
   }
 });
