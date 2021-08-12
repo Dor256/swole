@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    marginBottom: '10%'
+    marginBottom: '5%'
   },
   button: {
     marginTop: '15%'
