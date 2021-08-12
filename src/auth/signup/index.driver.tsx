@@ -17,6 +17,15 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
     },
     async submitButton() {
       return base.findByTestId(testIDs.SIGNUP_SUBMIT);
+    },
+    async invalidEmailError() {
+      return base.queryByText('Invalid email');
+    },
+    async passwordVerificationError() {
+      return base.queryByText('Password and verification do not match');
+    },
+    async passwordLengthError() {
+      return base.queryByText('Password must be longer than 6 characters');
     }
   };
 

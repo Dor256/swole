@@ -8,6 +8,7 @@ import { useNavigation } from '../hooks/useNavigation';
 import { ModalCloseIcon } from '../common/components/ModalCloseIcon';
 import { useMaybeState } from '../hooks/useMaybeState';
 import { BottomTabParamList, BottomTabs } from '../bottom-tabs';
+import { logger } from '../common/logger';
 
 export type HomeProps = Ports;
 
@@ -28,7 +29,7 @@ export const Home: React.FC<HomeProps> = ({ api, user }) => {
       await fetchWorkouts();
       navigation.goBack();
     } catch (err) {
-      console.warn('Adding workout failed');
+      logger.warn('Adding workout failed');
     }
   }
 

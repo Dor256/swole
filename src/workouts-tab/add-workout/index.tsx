@@ -18,11 +18,14 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
   const [maybeName, setMaybeName] = useMaybeState<string>();
   const [goal, setGoal] = useState<Goal>('strength');
   const [loading, setLoading] = useState(false);
+  const [maybeError, setMaybeError] = useMaybeState<string>();
   const color = useThemeColor({}, 'text');
 
   function onAddWorkout() {
     maybeName.inCaseOf({
-      Nothing: () => console.warn('Must enter name!'),
+      Nothing: () => {
+        setMaybeError(Maybe.fromValue('Must enter name!'));
+      },
       Just: async (name) => {
         setLoading(true);
         await props.addWorkout({ name, goal });
@@ -31,6 +34,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
   }
 
   function onNameChange(text: string) {
+    setMaybeError(Maybe.Nothing());
     setMaybeName(Maybe.fromValue(text));
   }
 
@@ -40,6 +44,7 @@ export const AddWorkout: React.FC<AddWorkoutProps> = (props) => {
         <Input
           testID={testIDs.ADD_WORKOUT_NAME}
           value={maybeName.orElse('')}
+          maybeError={maybeError}
           onChangeText={onNameChange}
           placeholder="Enter Workout Name"
           autoFocus

@@ -45,7 +45,24 @@ describe('Log in screen', () => {
 
     await driver.perform.typeEmail(mockEmail);
     await driver.perform.tapSubmitButton();
+    const error = await driver.get.invalidEmailError();
   
     expect(mockedLogin).not.toHaveBeenCalled();
+    expect(error).toBeDefined();
+  });
+
+  it('Does not log the user in if the email and password do not match', async () => {
+    const mockEmail = 'test@mail.com';
+    const mockPassword = 'password';
+    mockedLogin.mockRejectedValue('Wrong email or password');
+    const driver = renderComponentAndCreateDriver(<LoginPage />);
+
+    await driver.perform.typeEmail(mockEmail);
+    await driver.perform.typePassword(mockPassword);
+    await driver.perform.tapSubmitButton();
+    const error = await driver.get.wrongEmailOrPasswordError();
+
+    expect(mockedLogin).toHaveBeenCalledWith({ email: mockEmail, password: mockPassword });
+    expect(error).toBeDefined();
   });
 });

@@ -3,12 +3,12 @@ const tintColorDark = '#fff';
 
 export const Colors = {
   light: {
-    text: '#000',
+    text: '#20455e',
     background: '#fff',
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
-    input: '#d1d1d1',
+    input: '#e9ecf2',
     button: tintColorLight,
     buttonPressed: '#2676ad',
     link: '#0e78e3',

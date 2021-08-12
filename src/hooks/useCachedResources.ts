@@ -4,8 +4,9 @@ import { loadAsync } from 'expo-font';
 import { api, User } from '../common/api';
 import * as SplashScreen from 'expo-splash-screen';
 import { useMaybeState } from './useMaybeState';
+import { logger } from '../common/logger';
 
-SplashScreen.preventAutoHideAsync().catch(console.warn);
+SplashScreen.preventAutoHideAsync().catch(logger.warn);
 
 export function useCachedResources() {
   const [maybeUser, setMaybeUser] = useMaybeState<Omit<User, "password">>();
@@ -23,7 +24,7 @@ export function useCachedResources() {
         ]);
         setMaybeUser(maybeUser);
       } catch {
-        console.log('Failed to fetch user');
+        logger.info('Failed to fetch user');
       }
     }
     loadResources().then(() => {

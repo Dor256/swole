@@ -8,20 +8,36 @@ import { Header } from '../../common/components/Header';
 import { testIDs } from '../../common/constants/TestIDs';
 import { validateEmail } from '../../common/utils';
 import { View } from '../../common/components/Themed';
+import { useMaybeState } from '../../hooks/useMaybeState';
+import { Maybe } from '@xpacked/tool-belt';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [maybeEmailError, setMaybeEmailError] = useMaybeState<string>();
+  const [maybePasswordError, setMaybePasswordError] = useMaybeState<string>();
   const { logIn } = useAuth();
 
   async function onLogIn() {
     setLoading(true);
     if (!validateEmail(email)) {
+      setMaybeEmailError(Maybe.fromValue('Invalid email'));
       setLoading(false);
     } else {
-      await logIn({ email, password });
+      setMaybeEmailError(Maybe.Nothing());
+      try {
+        await logIn({ email, password });
+      } catch {
+        setLoading(false);
+        setMaybePasswordError(Maybe.fromValue('Email and Password do not match'));
+      }
     }
+  }
+
+  function onPasswordChange(text: string) {
+    setMaybePasswordError(Maybe.Nothing());
+    setPassword(text);
   }
 
   return (
@@ -33,6 +49,7 @@ export const LoginPage: React.FC = () => {
           style={styles.input}
           value={email}
           onChangeText={setEmail}
+          maybeError={maybeEmailError}
           textContentType="emailAddress"
           autoCapitalize="none"
           autoCorrect={false}
@@ -43,7 +60,8 @@ export const LoginPage: React.FC = () => {
         <Input
           testID={testIDs.LOGIN_PASSWORD}
           value={password}
-          onChangeText={setPassword}
+          onChangeText={onPasswordChange}
+          maybeError={maybePasswordError}
           textContentType="password"
           secureTextEntry
           autoCapitalize="none"

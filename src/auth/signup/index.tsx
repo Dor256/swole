@@ -1,3 +1,4 @@
+import { Maybe } from '@xpacked/tool-belt';
 import React, { useState } from 'react';
 import { Keyboard } from 'react-native';
 import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
@@ -8,20 +9,39 @@ import { View } from '../../common/components/Themed';
 import { testIDs } from '../../common/constants/TestIDs';
 import { validateEmail } from '../../common/utils';
 import { useAuth } from '../../hooks/useAuth';
+import { useMaybeState } from '../../hooks/useMaybeState';
+
+export type InputError = 'email' | 'passwordLength' | 'verification';
+
+const MIN_PASSWORD_LENGTH = 6;
 
 export const SignUpPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [passwordVerification, setPasswordVerification] = useState('');
   const [loading, setLoading] = useState(false);
+  const [maybeEmailError, setMaybeEmailError] = useMaybeState<string>();
+  const [maybePasswordError, setMaybePasswordError] = useMaybeState<string>();
+  const [maybeVerificationError, setMaybeVerificationError] = useMaybeState<string>();
   const { signUp } = useAuth();
 
   async function onSignUp() {
-    if (!validateEmail(email) || password !== passwordVerification) {
-
-    } else {
-      setLoading(true);
-      await signUp({ email, password });
+    switch (true) {
+      case !validateEmail(email):
+        setMaybeEmailError(Maybe.fromValue('Invalid email'));
+        break;
+      case password.length < MIN_PASSWORD_LENGTH:
+        setMaybeEmailError(Maybe.Nothing());
+        setMaybePasswordError(Maybe.fromValue('Password must be longer than 6 characters'));
+        break;
+      case password !== passwordVerification:
+        setMaybeEmailError(Maybe.Nothing());
+        setMaybePasswordError(Maybe.Nothing());
+        setMaybeVerificationError(Maybe.fromValue('Password and verification do not match'));
+        break;
+      default:
+        setLoading(true);
+        await signUp({ email, password });
     }
   }
 
@@ -36,6 +56,7 @@ export const SignUpPage: React.FC = () => {
           onChangeText={setEmail}
           textContentType="emailAddress"
           autoCapitalize="none"
+          maybeError={maybeEmailError}
           autoCorrect={false}
           placeholder="Email"
           clearButtonMode="while-editing"
@@ -45,9 +66,11 @@ export const SignUpPage: React.FC = () => {
           testID={testIDs.SIGNUP_PASSWORD}
           value={password}
           style={styles.input}
+          passwordRules="minlength: 6"
           onChangeText={setPassword}
           textContentType="password"
           secureTextEntry
+          maybeError={maybePasswordError}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Password"
@@ -61,6 +84,8 @@ export const SignUpPage: React.FC = () => {
           textContentType="password"
           secureTextEntry
           autoCapitalize="none"
+          passwordRules="minlength: 6"
+          maybeError={maybeVerificationError}
           autoCorrect={false}
           placeholder="Verify Password"
           clearButtonMode="while-editing"

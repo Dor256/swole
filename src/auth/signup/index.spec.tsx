@@ -53,8 +53,10 @@ describe('Sign up screen', () => {
     await driver.perform.typePassword(mockPassword);
     await driver.perform.typeVerification(mockVerification);
     await driver.perform.tapSubmitButton();
+    const error = await driver.get.passwordVerificationError();
 
     expect(mockedSignup).not.toHaveBeenCalled();
+    expect(error).toBeDefined();
   });
 
   it('Does not sign the user up when the email is invalid', async () => {
@@ -66,7 +68,24 @@ describe('Sign up screen', () => {
     await driver.perform.typePassword(mockPassword);
     await driver.perform.typeVerification(mockPassword);
     await driver.perform.tapSubmitButton();
+    const error = await driver.get.invalidEmailError();
 
     expect(mockedSignup).not.toHaveBeenCalled();
+    expect(error).toBeDefined();
+  });
+
+  it('Does not sign the user in when password is shorter than 6 characters', async () => {
+    const mockEmail = 'test@mail.com';
+    const mockPassword = '1';
+    const driver = renderComponentAndCreateDriver(<SignUpPage />);
+
+    await driver.perform.typeEmail(mockEmail);
+    await driver.perform.typePassword(mockPassword);
+    await driver.perform.typeVerification(mockPassword);
+    await driver.perform.tapSubmitButton();
+    const error = await driver.get.passwordLengthError();
+
+    expect(mockedSignup).not.toHaveBeenCalled();
+    expect(error).toBeDefined();
   });
 });

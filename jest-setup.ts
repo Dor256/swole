@@ -6,3 +6,12 @@ jest.mock('@expo/vector-icons', () => {
   };
 });
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+jest.mock('./src/common/logger', () => {
+  return {
+    logger: {
+      info: jest.fn(),
+      warn: jest.fn(),
+      error: jest.fn()
+    }
+  };
+});

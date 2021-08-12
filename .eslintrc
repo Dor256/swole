@@ -29,6 +29,7 @@
     "react/prop-types": 0,
     "react/display-name": 0,
     "jsx-quotes": ["warn", "prefer-double"],
-    "react/jsx-closing-bracket-location": ["warn", "tag-aligned"]
+    "react/jsx-closing-bracket-location": ["warn", "tag-aligned"],
+    "no-console": 1
   }
 }

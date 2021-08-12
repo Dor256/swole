@@ -16,7 +16,9 @@
       "node_modules/?!(@react-native-picker/picker|react-native-svg)"
     ],
     "resetMocks": true,
-    "setupFiles": ["<rootDir>/jest-setup.ts"]
+    "setupFiles": [
+      "<rootDir>/jest-setup.ts"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",

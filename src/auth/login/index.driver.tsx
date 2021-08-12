@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import { testIDs } from '../../common/constants/TestIDs';
 
 export function renderComponentAndCreateDriver(component: React.ReactElement<any, string | React.JSXElementConstructor<any>>) {
@@ -14,6 +14,12 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
     },
     async submitButton() {
       return base.findByTestId(testIDs.LOGIN_SUBMIT);
+    },
+    async invalidEmailError() {
+      return base.queryByText('Invalid email');
+    },
+    async wrongEmailOrPasswordError() {
+      return base.queryByText('Email and Password do not match');
     }
   };
 
@@ -25,7 +31,9 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
       await fireEvent.changeText(await get.passwordInput(), password);
     },
     async tapSubmitButton() {
-      await fireEvent.press(await get.submitButton());
+      await act(async () => {
+        await fireEvent.press(await get.submitButton());
+      });
     }
   };
 
