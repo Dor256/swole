@@ -12,8 +12,8 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
     async passwordInput() {
       return base.findByTestId(testIDs.SIGNUP_PASSWORD);
     },
-    async verifyPasswordInput() {
-      return base.findByTestId(testIDs.SIGNUP_VERIFY);
+    async confirmPasswordInput() {
+      return base.findByTestId(testIDs.SIGNUP_CONFIRMATION);
     },
     async submitButton() {
       return base.findByTestId(testIDs.SIGNUP_SUBMIT);
@@ -21,11 +21,11 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
     async invalidEmailError() {
       return base.queryByText('Invalid email');
     },
-    async passwordVerificationError() {
-      return base.queryByText('Password and verification do not match');
+    async passwordConfirmationError() {
+      return base.queryByText('Password and confirmation do not match');
     },
     async passwordLengthError() {
-      return base.queryByText('Password must be longer than 6 characters');
+      return base.queryByText('Password must be at least 6 characters');
     }
   };
 
@@ -36,8 +36,8 @@ export function renderComponentAndCreateDriver(component: React.ReactElement<any
     async typePassword(password: string) {
       await fireEvent.changeText(await get.passwordInput(), password);
     },
-    async typeVerification(verification: string) {
-      await fireEvent.changeText(await get.verifyPasswordInput(), verification);
+    async typeConfirmation(confirmation: string) {
+      await fireEvent.changeText(await get.confirmPasswordInput(), confirmation);
     },
     async tapSubmitButton() {
       await fireEvent.press(await get.submitButton());

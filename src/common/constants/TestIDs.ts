@@ -3,7 +3,7 @@ export const testIDs = {
   SIGNUP_BUTTON: 'sign-up-button',
   SIGNUP_EMAIL: 'sign-up-email',
   SIGNUP_PASSWORD: 'sign-up-pwd',
-  SIGNUP_VERIFY: 'sign-up-verify',
+  SIGNUP_CONFIRMATION: 'sign-up-confirmation',
   SIGNUP_SUBMIT: 'sign-up-submit',
   LOGIN_EMAIL: 'log-in-email',
   LOGIN_PASSWORD: 'log-in-password',

@@ -21,12 +21,12 @@ describe('Sign up screen', () => {
 
     const email = await driver.get.emailInput();
     const password = await driver.get.passwordInput();
-    const passwordVerification = await driver.get.verifyPasswordInput();
+    const passwordConfirmation = await driver.get.confirmPasswordInput();
     const submitButton = await driver.get.submitButton();
 
     expect(email).toBeDefined();
     expect(password).toBeDefined();
-    expect(passwordVerification).toBeDefined();
+    expect(passwordConfirmation).toBeDefined();
     expect(submitButton).toBeDefined();
   });
 
@@ -37,23 +37,23 @@ describe('Sign up screen', () => {
 
     await driver.perform.typeEmail(mockEmail);
     await driver.perform.typePassword(mockPassword);
-    await driver.perform.typeVerification(mockPassword);
+    await driver.perform.typeConfirmation(mockPassword);
     await driver.perform.tapSubmitButton();
 
     expect(mockedSignup).toHaveBeenCalledWith({ email: mockEmail, password: mockPassword });
   });
 
-  it('Does not sign the user up when password and verification are misaligned', async () => {
+  it('Does not sign the user up when password and confirmation are misaligned', async () => {
     const mockEmail = 'test@mail.com';
     const mockPassword = '111111';
-    const mockVerification = '222222';
+    const mockConfirmation = '222222';
     const driver = renderComponentAndCreateDriver(<SignUpPage />);
 
     await driver.perform.typeEmail(mockEmail);
     await driver.perform.typePassword(mockPassword);
-    await driver.perform.typeVerification(mockVerification);
+    await driver.perform.typeConfirmation(mockConfirmation);
     await driver.perform.tapSubmitButton();
-    const error = await driver.get.passwordVerificationError();
+    const error = await driver.get.passwordConfirmationError();
 
     expect(mockedSignup).not.toHaveBeenCalled();
     expect(error).toBeDefined();
@@ -66,7 +66,7 @@ describe('Sign up screen', () => {
 
     await driver.perform.typeEmail(mockEmail);
     await driver.perform.typePassword(mockPassword);
-    await driver.perform.typeVerification(mockPassword);
+    await driver.perform.typeConfirmation(mockPassword);
     await driver.perform.tapSubmitButton();
     const error = await driver.get.invalidEmailError();
 
@@ -81,7 +81,7 @@ describe('Sign up screen', () => {
 
     await driver.perform.typeEmail(mockEmail);
     await driver.perform.typePassword(mockPassword);
-    await driver.perform.typeVerification(mockPassword);
+    await driver.perform.typeConfirmation(mockPassword);
     await driver.perform.tapSubmitButton();
     const error = await driver.get.passwordLengthError();
 

@@ -11,18 +11,18 @@ import { validateEmail } from '../../common/utils';
 import { useAuth } from '../../hooks/useAuth';
 import { useMaybeState } from '../../hooks/useMaybeState';
 
-export type InputError = 'email' | 'passwordLength' | 'verification';
+export type InputError = 'email' | 'passwordLength' | 'confirmation';
 
 const MIN_PASSWORD_LENGTH = 6;
 
 export const SignUpPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [passwordVerification, setPasswordVerification] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [loading, setLoading] = useState(false);
   const [maybeEmailError, setMaybeEmailError] = useMaybeState<string>();
   const [maybePasswordError, setMaybePasswordError] = useMaybeState<string>();
-  const [maybeVerificationError, setMaybeVerificationError] = useMaybeState<string>();
+  const [maybeConfirmationError, setMaybeConfirmationError] = useMaybeState<string>();
   const { signUp } = useAuth();
 
   async function onSignUp() {
@@ -32,12 +32,12 @@ export const SignUpPage: React.FC = () => {
         break;
       case password.length < MIN_PASSWORD_LENGTH:
         setMaybeEmailError(Maybe.Nothing());
-        setMaybePasswordError(Maybe.fromValue('Password must be longer than 6 characters'));
+        setMaybePasswordError(Maybe.fromValue('Password must have at least 6 characters'));
         break;
-      case password !== passwordVerification:
+      case password !== passwordConfirmation:
         setMaybeEmailError(Maybe.Nothing());
         setMaybePasswordError(Maybe.Nothing());
-        setMaybeVerificationError(Maybe.fromValue('Password and verification do not match'));
+        setMaybeConfirmationError(Maybe.fromValue('Password and confirmation do not match'));
         break;
       default:
         setLoading(true);
@@ -51,7 +51,7 @@ export const SignUpPage: React.FC = () => {
         <Header>Create Your Account</Header>
         <Input
           testID={testIDs.SIGNUP_EMAIL}
-          style={styles.input}
+          containerStyle={styles.input}
           value={email}
           onChangeText={setEmail}
           textContentType="emailAddress"
@@ -65,7 +65,7 @@ export const SignUpPage: React.FC = () => {
         <Input
           testID={testIDs.SIGNUP_PASSWORD}
           value={password}
-          style={styles.input}
+          containerStyle={styles.input}
           passwordRules="minlength: 6"
           onChangeText={setPassword}
           textContentType="password"
@@ -76,18 +76,20 @@ export const SignUpPage: React.FC = () => {
           placeholder="Password"
           clearButtonMode="while-editing"
           returnKeyType="go"
+          inlineImageLeft={'../../../../assets/icon.png'}
         />
         <Input
-          testID={testIDs.SIGNUP_VERIFY}
-          value={passwordVerification}
-          onChangeText={setPasswordVerification}
+          testID={testIDs.SIGNUP_CONFIRMATION}
+          containerStyle={styles.input}
+          value={passwordConfirmation}
+          onChangeText={setPasswordConfirmation}
           textContentType="password"
           secureTextEntry
           autoCapitalize="none"
           passwordRules="minlength: 6"
-          maybeError={maybeVerificationError}
+          maybeError={maybeConfirmationError}
           autoCorrect={false}
-          placeholder="Verify Password"
+          placeholder="Confirm Password"
           clearButtonMode="while-editing"
           returnKeyType="go"
           onSubmitEditing={onSignUp}
@@ -108,12 +110,14 @@ export const SignUpPage: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: '10%'
   },
   input: {
-    marginBottom: '5%'
+    marginBottom: '6%'
   },
   button: {
-    marginTop: '15%'
+    marginTop: '10%',
+    width: '45%'
   }
 });

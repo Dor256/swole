@@ -74,9 +74,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: '20%'
+    paddingTop: '20%',
+    paddingHorizontal: '20%'
   },
   picker: {
-    width: '45%'
+    width: '80%'
   }
 });

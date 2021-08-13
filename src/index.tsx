@@ -37,7 +37,7 @@ const RootScreen: React.FC = () => {
   return maybeUser.inCaseOf({
     Nothing: () => {
       return (
-        <Navigator screenOptions={{ headerBackTitle: 'Back' }}>
+        <Navigator screenOptions={{ headerBackTitle: 'Back', title: '' }}>
           <Screen name="Welcome" component={WelcomeScreen} />
           <Screen name="Login" component={LoginPage} />
           <Screen name="Signup" component={SignUpPage} />

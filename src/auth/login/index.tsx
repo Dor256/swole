@@ -46,7 +46,7 @@ export const LoginPage: React.FC = () => {
         <Header>Login to Your Account</Header>
         <Input
           testID={testIDs.LOGIN_EMAIL}
-          style={styles.input}
+          containerStyle={styles.input}
           value={email}
           onChangeText={setEmail}
           maybeError={maybeEmailError}
@@ -60,6 +60,7 @@ export const LoginPage: React.FC = () => {
         <Input
           testID={testIDs.LOGIN_PASSWORD}
           value={password}
+          containerStyle={styles.input}
           onChangeText={onPasswordChange}
           maybeError={maybePasswordError}
           textContentType="password"
@@ -87,12 +88,14 @@ export const LoginPage: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: '10%'
   },
   input: {
     marginBottom: '5%'
   },
   button: {
-    marginTop: '15%'
+    marginTop: '10%',
+    width: '45%'
   }
 });
