@@ -6,13 +6,13 @@ const Colors = {
 };
 
 export const logger = {
-  info(message: string) {
+  info(message: unknown) {
     console.log(`${Colors.info}Info: ${message}${Colors.reset}`);
   },
-  warn(message: string) {
+  warn(message: unknown) {
     console.log(`${Colors.warn}Warn: ${message}${Colors.reset}`);
   },
-  error(message: string) {
+  error(message: unknown) {
     console.log(`${Colors.error}Error: ${message}${Colors.reset}`);
   }
 };

@@ -46,6 +46,7 @@ export const LoginPage: React.FC = () => {
         <Header>Login to Your Account</Header>
         <Input
           testID={testIDs.LOGIN_EMAIL}
+          autoFocus
           containerStyle={styles.input}
           value={email}
           onChangeText={setEmail}

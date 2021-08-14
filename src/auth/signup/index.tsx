@@ -56,6 +56,7 @@ export const SignUpPage: React.FC = () => {
           onChangeText={setEmail}
           textContentType="emailAddress"
           autoCapitalize="none"
+          autoFocus
           maybeError={maybeEmailError}
           autoCorrect={false}
           placeholder="Email"
