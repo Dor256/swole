@@ -1,5 +1,6 @@
 import { Maybe } from '@xpacked/tool-belt';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import type { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { useColorScheme } from 'react-native';
 import { TextInput, StyleSheet } from 'react-native';
@@ -62,6 +63,18 @@ export const Input: React.FC<InputProps> = ({
       transform: [{ translateY: placeholderY.value }]
     };
   });
+
+  useEffect(() => {
+    maybeError.inCaseOf({
+      Nothing: () => {},
+      Just: () => {
+        placeholderY.value = withTiming(FLOATING_PLACEHOLDER_VISIBLE_POS, {
+          duration: 200,
+          easing: Easing.inOut(Easing.linear)
+        });
+      }
+    });
+  }, [maybeError, placeholderY]);
 
   const boxShadow = theme === 'light' ? {
     shadowColor: maybeError.inCaseOf({ 
